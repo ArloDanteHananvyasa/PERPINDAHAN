@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaftarUMK</title>
+    <style>
+        body {
+            width: 1440px;
+            height: 1024px;
+            font-family: sans-serif;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 245px 1185px;
+            grid-template-rows: 95px 919px;
+            column-gap: 10px;
+            row-gap: 10px;
+            grid-template-areas:
+                "s h"
+                "s m";
+        }
+
+        .side {
+            grid-area: s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .groupside {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            color: #B1B1B1;
+            text-align: center;
+            background-color: white;
+            border: 0px;
+            cursor: pointer;
+            width: 250px;
+            height: 100px;
+        }
+
+        .judul {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #343C6A;
+        }
+
+        .Main {
+            grid-area: m;
+        }
+
+        .innerborder {
+            display: flex;
+            border: 1px solid grey;
+            justify-content: center;
+            align-items: center;
+            border-radius: 9px;
+            margin: 70px;
+        }
+
+        .groupmain {
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .groupmain label {
+            display: flex;
+            padding: 20px;
+            padding-right: 65px;
+            font-size: 16px;
+        }
+
+        .groupmain label:nth-child(1) {
+            color: #343C6A;
+            font-size: 17px;
+        }
+
+        .groupmain label[value="detail"] {
+            padding-bottom: 0px;
+            padding-top: 1px;
+        }
+
+        .groupmain button {
+            display: flex;
+            font-size: 16px;
+            margin-top: 34px;
+            width: 80px;
+            height: 25px;
+            border-radius: 15px;
+            justify-content: center;
+            background-color: white;
+        }
+
+        .Header {
+            grid-area: h;
+            display: flex;
+            justify-content: center;
+        }
+
+        .Header label {
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #343C6A;
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        .Header img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .groupside img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .groupside label[value="daftarumk"] {
+            color: #343C6A;
+        }
+
+        .groupside label {
+            flex: 0.9;
+            font-size: 18px;
+        }
+
+        .groupsidemain {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            color: #B1B1B1;
+            text-align: center;
+            background-color: #E3E4FF;
+            border: 0px;
+            cursor: pointer;
+
+        }
+
+        .groupsidemain img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .groupsidemain label {
+            flex: 0.9;
+            font-size: 18px;
+            color: #343C6A;
+        }
+
+        .page {
+            display: flex;
+            justify-content: right;
+            padding-right: 70px;
+        }
+
+        .head {
+            padding-left: 65px;
+            color: #343C6A;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="side">
+            <div class="judul">
+                <label for="">Wovey</label>
+                <label for="">Foodcourt.</label>
+            </div>
+            <button class="groupside">
+                <img src="static/Assets/daftarUMK/house.svg" alt="">
+                <label for="">Dashboard</label>
+            </button>
+            <button class="groupsidemain">
+                <img src="static/Assets/daftarUMK/bookUMK.svg" alt="">
+                <label for="" value="daftarumk">Daftar UMK</label>
+            </button>
+            <button class="groupside">
+                <img src="static/Assets/admin/fileceklist.svg" alt="">
+                <label for="">Verifikasi</label>
+                <img src="static/Assets/admin/notif.svg" alt="" style="width:40px;">
+            </button>
+            <button class="groupside">
+                <img src="static/Assets/admin/stonks.svg" alt="">
+                <label for="">Penjualan</label>
+            </button>
+            <button class="groupside">
+                <img src="static/Assets/admin/logout.svg" alt="">
+                <label for="">Log Out</label>
+            </button>
+            <button class="groupside">
+                <img src="static/Assets/admin/help.svg" alt="">
+                <label for="">Bantuan</label>
+            </button>
+        </div>
+        <div class="Header">
+            <label for="">Daftar UMK</label>
+        </div>
+        <div class="Main">
+            <div class="head">
+                <h1>Daftar UMK</h2>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <th>No.HP</th>
+                        <th>Nama UMK</th>
+                        <th>Nama Pemilik</th>
+                        <th>Tanggal Terverifikasi</th>
+                        <th>Detail</th>
+                    </tr>
+                    <tr th:each="row : ${results}">
+                        <td th:text="${row.hp}"></td>
+                        <td th:text="${row.namaUMK}"></td>
+                        <td th:text="${row.namaPem}"></td>
+                        <td th:text="${row.tanggal}"></td>
+                        <td><button>Detail</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="page">
+                <img src="static/Assets/DaftarUMK/page.svg" alt="">
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
