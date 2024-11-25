@@ -1,0 +1,237 @@
+/* CSS untuk Wovey FoodCourt */
+
+body {
+    margin: 0;
+    font-family: "Inter-SemiBold", sans-serif;
+    color: #343C6A;
+}
+
+/* Header */
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    height: 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white; /* Pastikan background tetap solid agar tidak transparan saat scrolling */
+}
+
+hr{
+    display: block;
+    height: 0.1px;
+    width: 80%;
+    background-color: white;
+}
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: #343C6A;
+}
+
+.login-sigin button{
+    border: none;
+    background-color: transparent;
+}
+
+
+.login-sigin a.signin-btn {
+    background-color: #007BFF;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.login-sigin a.signin-btn:hover {
+    background-color: #86a4ff;
+    color: #fafcfe;
+}
+
+.login-sigin a.login-btn {
+    background-color: #F5F7FA;
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.login-sigin a.login-btn:hover {
+    background-color: #b0cfff;
+    color: #007BFF;
+}
+
+/* Section 1 */
+#section1 {
+    background: url('bg-section-10.png') no-repeat center center/cover;
+    text-align: left;
+    padding: 50px 20px;
+    color:#343C6A;
+    height:400px;
+    display: flex;
+    align-items: center;
+    
+}
+
+#section1 div{
+    width: 60%;
+    margin-left: 20px;
+}
+
+.title-section-1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.desc-section-1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.sign-in-btn-section-1 {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left:20px;
+}
+.sign-in-btn-section-1 a {
+   text-decoration: none;
+   color:white;
+   font-weight: 600;
+}
+
+.sign-in-btn-section-1:hover {
+    background-color: #86a4ff;
+}
+
+/* Section 2 */
+#section2 {
+    padding: 50px 20px;
+    background: url('bg-section-20.png') no-repeat center center/cover;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    height:400px;
+}
+
+.fitur-section-2 {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.left-fitur, .right-fitur {
+    text-align: center;
+    max-width: 300px;
+    background-color: rgba(255, 255, 255, 0.68);
+    border-radius: 25px;
+    padding: 30px;
+}
+
+.left-illust-section-2 {
+    width: 170px;
+    margin-bottom: 20px;
+}
+
+.right-illust-section-2 {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.title-left-fitur-section-2, .title-right-fitur-section-2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.desc-left-fitur-section-2, .desc-right-fitur-section-2 {
+    font-size: 16px;
+}
+
+/* Section 3 */
+#section3 {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #ffffff;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+.header-section-3 {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-header-section-3 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.desc-header-section-3 {
+    font-size: 15px;
+    line-height: 1.5;
+    width: 80%;
+}
+
+.steps-section-3 {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    margin-top: 20px;
+}
+
+.steps-section-3 > div {
+    text-align: center;
+    max-width: 200px;
+}
+
+.step1-title-section-3, .step2-title-section-3, .step3-title-section-3, .step4-title-section-3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.step1-desc-section-3, .step2-desc-section-3, .step3-desc-section-3, .step4-desc-section-3 {
+    font-size: 14px;
+}
+
+/* Footer */
+#footer {
+    background-color: #0058EA;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.uppertext-footer {
+    font-size: 16px;
+}
+
+.lowertext-footer {
+    margin-top: 10px;
+    font-size: 14px;
+}

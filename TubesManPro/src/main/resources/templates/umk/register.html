@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Assets/registrasi/styleRegister.css">
+    <script src="/Assets/registrasi/register.js" defer></script>
+    <title>Register</title>
+</head>
+
+<body>
+    <!-- Container -->
+    <div class="container">
+        <!-- Left Section -->
+        <img src="/Assets/registrasi/left-img0.png" class="left-section">
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="logo">
+                Wovey<br>Foodcourt.
+            </div>
+            <div class="title">
+                <h1 class="title-text">Pendaftaran Akun</h1>
+                <p class="desc-title">Daftarkan dan kelola pembukuan usaha anda dengan lebih praktis!</p>
+            </div>
+            <form class="register-form" th:method="post" th:action="@{/umk/submit}">
+                <div class="input-group umk">
+                    <label for="nama-umk">Nama UMK</label>
+                    <input type="text" id="nama-umk" name="namaUMK" th:value="${namaUMK}" placeholder="Nama UMK anda">
+                </div>
+                <div class="input-group pemilik">
+                    <label for="nama-pemilik">Nama Pemilik</label>
+                    <input type="text" id="nama-pemilik" name="namaPemilik" th:value="${namaPemilik}"
+                        placeholder="Nama lengkap anda">
+                </div>
+                <div class="input-group alamatEmail">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" th:value="${email}" placeholder="Alamat email anda">
+                </div>
+                <div class="input-group notelp">
+                    <label for="nomor-telepon">Nomor Telepon</label>
+                    <input type="text" id="nomor-telepon" name="noHp" th:value="${noHp}"
+                        placeholder="Nomor telepon anda">
+                </div>
+                <div class="input-group pass">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" th:value="${password}"
+                        placeholder="Minimal 8 digit">
+                </div>
+                <div class="input-group konfirm-pass">
+                    <label for="konfirm-password">Konfirmasi Password</label>
+                    <input type="password" id="konfirm-password" name="ulangPassword" th:value="${ulangPassword}"
+                        placeholder="Masukkan kembali password">
+                </div>
+                <div class="terms-container">
+                    <input type="checkbox" id="terms-checkbox" name="termsAccepted">
+                    <label for="terms-checkbox">Saya setuju terhadap semua <a href="terms.html">Syarat dan
+                            Ketentuan</a></label>
+                </div>
+                <input type="button" id="submit-button" class="submit-button" value="Buat Akun">
+            </form>
+            <div class="login-offer">
+                Sudah memiliki akun? <a th:href="@{/login/}">Masuk</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="regis-sent" class="overlay hidden">
+        <div class="overlay-content">
+            <img src="/Assets/registrasi/check-icon0.png" alt="Check Icon" class="check-icon">
+            <h1>Pendaftaran anda terkirim!</h1>
+            <p>Periksa email anda secara berkala untuk melihat hasil verifikasi pendaftaran oleh admin kami</p>
+            <button class="ok-btn">OK</button>
+        </div>
+    </div>
+</body>
+
+</html>

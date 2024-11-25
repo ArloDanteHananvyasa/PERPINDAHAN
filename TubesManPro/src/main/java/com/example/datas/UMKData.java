@@ -17,6 +17,5 @@ public class UMKData {
     private Date tanggal;
     private double saldo;
     private String namaPem;
-    private String kota;
-    private String provinsi;
+    private String email;
 }

@@ -28,7 +28,7 @@ public class JDBCAdmin implements AdminRepository {
     @Override
     public List<UMKData> findVerif() {
         List<UMKData> umk = jdbc.query(
-                "SELECT * FROM umk WHERE status = 'Belum diverifikasi' ORDER BY IDPendaftaran",
+                "SELECT * FROM umk WHERE status = 'Belum Diverifikasi' ORDER BY IDPendaftaran",
                 this::mapRowToUmkData);
         return umk;
     }
@@ -44,8 +44,7 @@ public class JDBCAdmin implements AdminRepository {
                 resultSet.getDate("tanggal"),
                 resultSet.getDouble("saldo"),
                 resultSet.getString("namapemilik"),
-                resultSet.getString("namakota"),
-                resultSet.getString("namaprovinsi"));
+                resultSet.getString("email"));
     }
 
 }
