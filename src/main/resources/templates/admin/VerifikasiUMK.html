@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verif Pendaftaran</title>
+    <link rel="stylesheet" href="/Assets/admin/verifikasi/VerifPendaftaran.css">
+</head>
+
+<body>
+    <div class="page-container">
+
+        <div class="logo">
+            <p class="wovey">Wovey<br />Foodcourt .</p>
+        </div>
+
+        <!-- Header Section -->
+        <div class="header">
+            <p class="dashboard-header">Verifikasi</p>
+            <img class="profile" src="/Assets/admin/verifikasi/generic-avatar0.svg" />
+        </div>
+
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <div class="navigation">
+                <div class="menu-item dashboard">
+                    <img class="icon-dashboard" src="/Assets/admin/verifikasi/icon-dashboard.svg" />
+                    <p class="nav-dashboard">Dashboard</p>
+                </div>
+
+                <div class="menu-item daftar-umk">
+                    <img class="icon-daftar-umk" src="/Assets/admin/verifikasi/icon-daftar-umk.svg" />
+                    <p class="nav-daftar-umk">Daftar UMK</p>
+                </div>
+
+                <div class="menu-item verifikasi">
+                    <img class="icon-verifikasi" src="/Assets/admin/verifikasi/icon-verifikasi.svg" />
+                    <p class="nav-verifikasi">Verifikasi</p>
+                    <!-- <span class="badge">13</span> -->
+                </div>
+
+                <div class="menu-item penjualan">
+                    <img class="icon-penjualan" src="/Assets/admin/verifikasi/icon-penjualan.svg" />
+                    <p class="nav-penjualan">Penjualan</p>
+                </div>
+
+                <div class="nav-divider">
+                    <hr class="solid" />
+                </div>
+
+                <div class="menu-item log-out">
+                    <img class="icon-log-out" src="/Assets/admin/verifikasi/icon-logout.svg" />
+                    <p class="nav-log-out">Log Out</p>
+                </div>
+
+                <div class="menu-item bantuan">
+                    <img class="icon-bantuan" src="/Assets/admin/verifikasi/icon-bantuan.svg" />
+                    <p class="nav-bantuan">Bantuan</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="list-umk">
+                <table>
+                    <tr>
+                        <th>No.HP</th>
+                        <th>Nama UMK</th>
+                        <th>Nama Pemilik</th>
+                        <th>Tanggal Pengajuan</th>
+                        <th>Detail</th>
+                        <th>Verifikasi</th>
+                    </tr>
+                    <tr th:each="row : ${results}">
+                        <td th:text="${row.hp}"></td>
+                        <td th:text="${row.namaUMK}"></td>
+                        <td th:text="${row.namaPem}"></td>
+                        <td th:text="${row.tanggal}"></td>
+                        <td><button class="detail-btn">Detail</button></td>
+                        <td><button>Verifikasi</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+</body>
+
+</html>

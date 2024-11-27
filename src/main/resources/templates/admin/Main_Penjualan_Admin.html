@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Assets/admin/mainPenjualan/MainPenjualanAdmin.css">
+    <title>Penjualan</title>
+</head>
+
+<body>
+    <div class="page-container">
+
+        <div class="logo">
+            <p class="wovey">Wovey<br />Foodcourt .</p>
+        </div>
+
+        <!-- Header Section -->
+        <div class="header">
+            <p class="dashboard-header">Penjualan</p>
+            <img class="profile" src="/Assets/admin/mainPenjualan/generic-avatar0.svg" />
+        </div>
+
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <div class="navigation">
+                <div class="menu-item dashboard">
+                    <img class="icon-dashboard" src="/Assets/admin/mainPenjualan/home-20.svg" />
+                    <p class="nav-dashboard">Dashboard</p>
+                </div>
+
+                <div class="menu-item daftar-umk">
+                    <img class="icon-daftar-umk" src="/Assets/admin/mainPenjualan/book-030.svg" />
+                    <p class="nav-daftar-umk">Daftar UMK</p>
+                </div>
+
+                <div class="menu-item verifikasi">
+                    <img class="icon-verifikasi" src="/Assets/admin/mainPenjualan/folder-check0.svg" />
+                    <p class="nav-verifikasi">Verifikasi</p>
+                    <!-- <span class="badge">13</span> -->
+                </div>
+
+                <div class="menu-item penjualan">
+                    <img class="icon-penjualan" src="/Assets/admin/mainPenjualan/icon-graph0.svg" />
+                    <p class="nav-penjualan">Penjualan</p>
+                </div>
+
+                <div class="nav-divider">
+                    <hr class="solid" />
+                </div>
+
+                <div class="menu-item log-out">
+                    <img class="icon-log-out" src="/Assets/admin/mainPenjualan/logout-040.svg" />
+                    <p class="nav-log-out">Log Out</p>
+                </div>
+
+                <div class="menu-item bantuan">
+                    <img class="icon-bantuan" src="/Assets/admin/mainPenjualan/help-circle-contained0.svg" />
+                    <p class="nav-bantuan">Bantuan</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="main-left-section">
+                <img src="/Assets/admin/mainPenjualan/left-img.png" class="left-img">
+                <h2 class="left-section-title">Produk</h2>
+            </div>
+            <a th:href="@{/admin/terlaris}">
+                <div class="main-right-section">
+                    <img src="/Assets/admin/mainPenjualan/right-img.png" class="right-img">
+                    <h2 class="right-section-title">UMK</h2>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</body>
+
+</html>

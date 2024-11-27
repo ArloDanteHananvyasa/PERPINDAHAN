@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/Assets/admin/homepageAdminStyle.css" />
+  <title>Wovey Foodcourt - Homepage Admin</title>
+</head>
+
+<body>
+  <div class="page-container">
+    <!-- Logo Section -->
+    <div class="logo">
+      <p class="wovey">Wovey<br />Foodcourt .</p>
+    </div>
+
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+      <div class="navigation">
+        <div class="menu-item dashboard">
+          <img class="icon-dashboard" src="/Assets/admin/home-20.svg" />
+          <p class="nav-dashboard"><a th:href="@{/admin/home}">Dashboard</a></p>
+        </div>
+
+        <div class="menu-item daftar-umk">
+          <img class="icon-daftar-umk" src="/Assets/admin/book-030.svg" />
+          <p class="nav-daftar-umk"><a th:href="@{/admin/umk}">Daftar UMK</a></p>
+        </div>
+
+        <div class="menu-item verifikasi">
+          <img class="icon-verifikasi" src="/Assets/admin/folder-check0.svg" />
+          <p class="nav-verifikasi"><a th:href="@{/admin/verifikasi}">Verifikasi</a></p>
+          <!-- <span class="badge" th:text="${totalUmkTidakTerdaftarBadge}"></span> -->
+        </div>
+
+        <div class="menu-item penjualan">
+          <img class="icon-penjualan" src="/Assets/admin/icon-graph0.svg" />
+          <p class="nav-penjualan"><a th:href="@{/admin/penjualan}">Penjualan</a></p>
+        </div>
+
+        <div class="nav-divider">
+          <hr class="solid" />
+        </div>
+
+        <div class="menu-item log-out">
+          <img class="icon-log-out" src="/Assets/admin/logout-040.svg" />
+          <p class="nav-log-out">Log Out</p>
+        </div>
+
+        <div class="menu-item bantuan">
+          <img class="icon-bantuan" src="/Assets/admin/help-circle-contained0.svg" />
+          <p class="nav-bantuan">Bantuan</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header">
+      <p class="dashboard-header">Dashboard</p>
+      <img class="profile" src="/Assets/admin/generic-avatar0.svg" />
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+      <div class="sub-header">
+        <p class="welcome-admin">Selamat datang, Admin!</p>
+        <p class="quotes">
+          "Setiap langkah kecil adalah bagian dari perjalanan besar."
+        </p>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="icon-green">
+            <img src="/Assets/admin/users0.svg" />
+            <p>Total UMK terdaftar saat ini</p>
+            <h3 th:text="${totalUmkTerdaftar}"></h3>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="icon-gray">
+            <img src="/Assets/admin/verifikasi.svg" />
+            <p>Total UMK memerlukan verifikasi</p>
+            <h3 th:text="${totalUmkTidakTerdaftar}"></h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="registered-umk-section">
+        <img src="/Assets/admin/equipment-list-2.png" />
+        <h3>Daftar UMK Terdaftar</h3>
+        <ul class="umk-list">
+          <li th:text="${UMK1}"></li>
+          <li th:text="${UMK2}"></li>
+          <li th:text="${UMK3}"></li>
+        </ul>
+      </div>
+
+      <div class="top-products-section">
+        <img src="/Assets/admin/cart.png" />
+        <h3>Produk Terlaris</h3>
+        <ol class="top-products-list">
+          <li th:text="${terlaku1}"></li>
+          <li th:text="${terlaku2}"></li>
+          <li th:text="${terlaku3}"></li>
+        </ol>
+      </div>
+
+      <div class="top-umks-section">
+        <img src="/Assets/admin/store.jpg" />
+        <h3>Top UMK dengan Penjualan Tertinggi</h3>
+        <ol class="top-umks-list">
+          <li th:text="${topUMK1}"></li>
+          <li th:text="${topUMK2}"></li>
+          <li th:text="${topUMK3}"></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

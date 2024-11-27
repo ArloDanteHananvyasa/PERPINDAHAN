@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/Assets/admin/terlaris/updateStyle.css" />
+  <title>Wovey Foodcourt - Homepage Admin</title>
+</head>
+
+<body>
+  <div class="page-container">
+    <!-- Logo Section -->
+    <div class="logo">
+      <p class="wovey">Wovey<br />Foodcourt .</p>
+    </div>
+
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+      <div class="navigation">
+        <div class="menu-item dashboard">
+          <img class="icon-dashboard" src="/Assets/admin/terlaris/home-20.svg" />
+          <p class="nav-dashboard">Dashboard</p>
+        </div>
+
+        <div class="menu-item daftar-umk">
+          <img class="icon-daftar-umk" src="/Assets/admin/terlaris/book-030.svg" />
+          <p class="nav-daftar-umk">Daftar UMK</p>
+        </div>
+
+        <div class="menu-item verifikasi">
+          <img class="icon-verifikasi" src="/Assets/admin/terlaris/folder-check0.svg" />
+          <p class="nav-verifikasi">Verifikasi</p>
+          <span class="badge">13</span>
+        </div>
+
+        <div class="menu-item penjualan">
+          <img class="icon-penjualan" src="/Assets/admin/terlaris/icon-graph0.svg" />
+          <p class="nav-penjualan">Penjualan</p>
+        </div>
+
+        <div class="nav-divider">
+          <hr class="solid" />
+        </div>
+
+        <div class="menu-item log-out">
+          <img class="icon-log-out" src="/Assets/admin/terlaris/logout-040.svg" />
+          <p class="nav-log-out">Log Out</p>
+        </div>
+
+        <div class="menu-item bantuan">
+          <img class="icon-bantuan" src="/Assets/admin/terlaris/help-circle-contained0.svg" />
+          <p class="nav-bantuan">Bantuan</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header">
+      <div class="header-navigator">
+        <a class="penjualan-header">Penjualan </a>
+        <a class="UMK-header"> &gt; UMK</a>
+      </div>
+      <img class="profile" src="/Assets/admin/terlaris/generic-avatar0.svg" />
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+      <div class="sub-header">
+        <p class="sub-header-title">Daftar UMK Terlaris</p>
+        <div class="input-jumlah-umk">
+          <input type="text" placeholder="Masukkan jumlah yang ingin dicari (1-1000):" />
+          <button type="submit" class="ok-button">OK</button>
+        </div>
+      </div>
+
+      <div class="list-umk">
+        <table>
+          <tr>
+            <th>Nama UMK</th>
+            <th>Kuantitas Transaksi</th>
+            <th>Total transaksi</th>
+          </tr>
+          <tr th:each="row : ${results}">
+            <td th:text="${row.namaUMK}"></td>
+            <td th:text="${row.jumlahTransaksi}"></td>
+            <td th:text="${row.totalTransaksi}"></td>
+            <td><button>Detail</button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- <div class="page-navigation-container">
+      <div class="page-navigation">
+        <p class="_1">1</p>
+        <p class="_2">2</p>
+        <p class="_3">3</p>
+        <p class="_4">4</p>
+        <p class="selanjutnya">Selanjutnya</p>
+        <img class="arrow" src="/Assets/admin/terlaris/arrow0.svg" />
+      </div>
+    </div> -->
+  </div>
+</body>
+
+</html>
