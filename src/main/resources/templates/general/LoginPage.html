@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoginPage</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Inter-SemiBold", sans-serif;
+            background-color: #f9fafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Memastikan kontainer ada di tengah */
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            column-gap: 0;
+            align-items: center;
+            vertical-align: center;
+            height: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 25px;
+        }
+
+        .div1 {
+            grid-area: h;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: 200px 100px 50px 80px 100px 200px;
+            grid-template-areas:
+                "h1"
+                "h2"
+                "h3"
+                "h4"
+                "h5"
+                "h6"
+            ;
+        }
+
+        .div1 .judul {
+            grid-area: h1;
+            display: flex;
+            font-family: sans-serif;
+            color: #343C6A;
+            font-weight: bold;
+            font-size: 48px;
+            align-items: flex-end;
+        }
+
+        .item1 label[value="1"] {
+            grid-area: h2;
+            display: flex;
+            flex-direction: column;
+            font-family: sans-serif;
+            color: #343C6A;
+            font-weight: bold;
+            font-size: 40px;
+        }
+
+        .item1 label[value="2"] {
+            grid-area: h2;
+            display: flex;
+            flex-direction: column;
+            font-family: sans-serif;
+            color: #313131;
+            font-size: 18px;
+        }
+
+        .item2,
+        .item3 {
+            display: flex;
+            margin: 0px;
+            padding: 0px;
+            margin-top: 20px;
+        }
+
+        .item2 label,
+        .item3 label {
+            flex: 0.65;
+            color: #343C6A;
+            font-family: sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+        }
+
+        .item2 input,
+        .item3 input {
+            height: 30px;
+            width: 300px;
+            border-radius: 6px;
+            border: 1px solid #79747E;
+            color: #79747E;
+        }
+
+        .item2 {
+            grid-area: h3;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item3 {
+            grid-area: h4;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item4 {
+            grid-area: h5;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            color: #343C6A;
+            font-family: sans-serif;
+            padding: 40px;
+            padding-left: -0px;
+        }
+
+        .item4 input {
+            flex: 0.02;
+            width: 90px;
+        }
+
+        .item4 label {
+            flex: 1
+        }
+
+        .item4 a {
+            color: red;
+        }
+
+        .item5 button {
+            grid-area: h6;
+            color: white;
+            font-family: sans-serif;
+            width: 512px;
+            height: 48px;
+            font-size: 16px;
+            background-color: #2D60FF;
+            border: #343C6A;
+            border-radius: 9px;
+        }
+
+        .item5 button:hover {
+            background-color: rgba(0, 88, 234, 0.8);
+        }
+
+        .item6 {
+            grid-area: p;
+        }
+
+        img {
+            width: 100%;
+            height: 500px;
+        }
+
+        .login-button {
+            display: flex;
+            align-items: center;
+            background-color: #0058ea;
+            border: 1px solid #b1b1b1;
+            border-radius: 15px;
+            width: 150px;
+            height: 50px;
+            padding: 15px 15px;
+            color: white;
+            font-family: "Inter-Regular", sans-serif;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="div1">
+            <div class="judul">
+                <label for="">Wovey</label>
+                <label for="">Foodcourt.</label>
+            </div>
+            <div class="item1">
+                <label for="" value="1">Selamat Datang</label>
+                <label for="" value="2">Mari masuk ke akun anda!</label>
+            </div>
+            <form th:method="POST" th:action="@{/login/verify}">
+                <div class="item2">
+                    <label for="">Nomor telepon</label>
+                    <input type="text" name="noHp" th:value="${noHp}" placeholder="08123456789">
+                </div>
+                <div class="item3">
+                    <label for="">Password</label>
+                    <input type="password" name="password" th:value="${password}" placeholder="**********">
+                </div>
+                <div class="item4">
+                    <input type="checkbox">
+                    <label for="">Ingat saya</label>
+                    <a href="" id="lupa-password">Lupa Password?</a>
+                </div>
+                <div class="item5">
+                    <input type="submit" value="LOGIN" class="login-button"></input>
+                </div>
+            </form>
+        </div>
+        <div class="item6">
+            <img src="/Assets/Login/loginPic.png" />
+        </div>
+    </div>
+</body>
+
+</html>

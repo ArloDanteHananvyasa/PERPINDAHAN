@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verif Pendaftaran</title>
+    <link rel="stylesheet" href="/Assets/admin/verifikasi/VerifPendaftaran.css">
+</head>
+
+<body>
+    <div class="page-container">
+
+        <div class="logo">
+            <p class="wovey">Wovey<br />Foodcourt .</p>
+        </div>
+
+        <!-- Header Section -->
+        <div class="header">
+            <p class="dashboard-header">Verifikasi</p>
+            <img class="profile" src="/Assets/admin/verifikasi/generic-avatar0.svg" />
+        </div>
+
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <div class="navigation">
+                <div class="menu-item dashboard">
+                    <img class="icon-dashboard" src="/Assets/admin/verifikasi/icon-dashboard.svg" />
+                    <p class="nav-dashboard"><a th:href="@{/admin/home}">Dashboard</a></p>
+                </div>
+
+                <div class="menu-item daftar-umk">
+                    <img class="icon-daftar-umk" src="/Assets/admin/verifikasi/icon-daftar-umk.svg" />
+                    <p class="nav-daftar-umk"><a th:href="@{/admin/umk}">Daftar UMK</a></p>
+                </div>
+
+                <div class="menu-item verifikasi">
+                    <img class="icon-verifikasi" src="/Assets/admin/verifikasi/icon-verifikasi.svg" />
+                    <p class="nav-verifikasi"><a th:href="@{/admin/verifikasi}">Verifikasi</a></p>
+                    <span class="badge" th:text="${totalUmkTidakTerdaftarBadge}"
+                        th:style="|display: ${totalUmkTidakTerdaftarBadge > 0 ? 'inline-block' : 'none'}|"></span>
+                </div>
+
+                <div class="menu-item penjualan">
+                    <img class="icon-penjualan" src="/Assets/admin/verifikasi/icon-penjualan.svg" />
+                    <p class="nav-penjualan"><a th:href="@{/admin/penjualan}">Penjualan</a></p>
+                </div>
+
+                <div class="nav-divider">
+                    <hr class="solid" />
+                </div>
+
+                <div class="menu-item log-out">
+                    <img class="icon-log-out" src="/Assets/admin/verifikasi/icon-logout.svg" />
+                    <p class="nav-log-out">Log Out</p>
+                </div>
+
+                <div class="menu-item bantuan">
+                    <img class="icon-bantuan" src="/Assets/admin/verifikasi/icon-bantuan.svg" />
+                    <p class="nav-bantuan">Bantuan</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="list-umk">
+                <table>
+                    <tr>
+                        <th>No.HP</th>
+                        <th>Nama UMK</th>
+                        <th>Nama Pemilik</th>
+                        <th>Tanggal Pengajuan</th>
+                        <th>Detail</th>
+                        <th>Verifikasi</th>
+                    </tr>
+                    <tr th:each="row : ${results}">
+                        <td th:text="${row.hp}"></td>
+                        <td th:text="${row.namaUMK}"></td>
+                        <td th:text="${row.namaPem}"></td>
+                        <td th:text="${row.tanggal}"></td>
+                        <td><a th:href="@{/admin/verifikasi/detail(hp=${row.hp})}"><button
+                                    class="detail-btn">Detail</button></a></td>
+                        <td><button class="verify-btn" data-hp="${row.hp}" data-nama="${row.namaUMK}">Verify</button>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div th:if="${umkDetail != null}" class="modal">
+            <div class="modal-content">
+                <h2>Detail UMK</h2>
+                <p><strong>No. HP:</strong> <span th:text="${umkDetail.hp}"></span></p>
+                <p><strong>Nama UMK:</strong> <span th:text="${umkDetail.namaUMK}"></span></p>
+                <p><strong>Deskripsi:</strong> <span th:text="${umkDetail.deskripsi}"></span></p>
+                <p><strong>Logo:</strong> <img th:src="@{${umkDetail.logo}}" alt="Logo UMK"></p>
+                <p><strong>Alamat:</strong> <span th:text="${umkDetail.alamat}"></span></p>
+                <p><strong>Status:</strong> <span th:text="${umkDetail.status}"></span></p>
+                <p><strong>Tanggal:</strong> <span th:text="${umkDetail.tanggal}"></span></p>
+                <p><strong>Saldo:</strong> <span th:text="${umkDetail.saldo}"></span></p>
+                <p><strong>Nama Pemilik:</strong> <span th:text="${umkDetail.namaPem}"></span></p>
+                <p><strong>Email:</strong> <span th:text="${umkDetail.email}"></span></p>
+                <a href="/admin/verifikasi" class="close-button"><button>Close</button></a>
+            </div>
+        </div>
+
+        <div id="verificationModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Verifikasi UMK</h2>
+                <p>Apakah Anda yakin ingin memverifikasi UMK ini?</p>
+                <!-- Form for Verifikasi -->
+                <form id="verificationForm" th:action="@{/admin/verifikasi/verify}" method="POST">
+                    <input type="hidden" name="hp" id="modalHp">
+                    <input type="hidden" name="action" value="verify"> <!-- Action for verification -->
+                    <button type="submit" id="acceptBtn">Verifikasi</button>
+                </form>
+                <!-- Form for Reject -->
+                <form id="rejectionForm" th:action="@{/admin/verifikasi/verify}" method="POST">
+                    <input type="hidden" name="hp" id="modalHpReject">
+                    <input type="hidden" name="action" value="reject"> <!-- Action for rejection -->
+                    <button type="submit" id="rejectBtn">Tolak</button>
+                </form>
+                <button id="closeModalBtn">Close</button>
+            </div>
+        </div>
+
+        <script>
+            const verificationModal = document.getElementById('verificationModal');
+            const verifikasiBtns = document.querySelectorAll('.verify-btn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+
+            // Add event listener for each "Verify" button
+            verifikasiBtns.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Get the data attributes from the clicked button
+                    const hp = this.getAttribute('data-hp');
+                    const namaUMK = this.getAttribute('data-nama');
+
+                    // Set the hp value for both forms (for verification and rejection)
+                    document.getElementById('modalHp').value = hp;
+                    document.getElementById('modalHpReject').value = hp;
+
+                    // Open the modal
+                    verificationModal.style.display = 'block';
+                });
+            });
+
+            // Close the modal
+            closeModalBtn.addEventListener('click', function () {
+                verificationModal.style.display = 'none';
+            });
+        </script>
+</body>
+
+</html>

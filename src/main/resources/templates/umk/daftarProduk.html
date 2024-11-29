@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="/Assets/umk/daftarProduk/updateStyle.css" />
+  <title>Wovey Foodcourt</title>
+</head>
+
+<body>
+  <div class="logo">
+    <p class="wovey">Wovey<br />Foodcourt .</p>
+  </div>
+  <div class="header">
+    <p class="produk">Produk</p>
+    <a th:href="@{/umk/profile}"><img class="profile" th:src="${profilePic}" /></a>
+  </div>
+  <div class="main-content">
+    <div class="sub-header">
+      <p class="daftar-produk">Daftar Produk</p>
+      <div class="cari-add-produk">
+        <div class="cari-produk">
+          <img class="search-button" src="/Assets/umk/daftarProduk/group0.svg" />
+          <form th:method="GET" th:action="@{/umk/produk}">
+            <input type="text" name="filter" th:value="${filter}" placeholder="Cari Produk" />
+          </form>
+        </div>
+        <button type="button" class="blue-button add-produk">
+          (+) Tambah Produk
+        </button>
+      </div>
+    </div>
+
+    <div class="sub-sub-header">
+      <p class="semua-produk2">Semua Produk</p>
+    </div>
+
+    <div class="list-produk">
+      <table>
+        <tr>
+          <th>Foto Produk</th>
+          <th>Nama Produk</th>
+          <th>Jumlah Stok</th>
+          <th>Harga</th>
+          <th>Edit</th>
+        </tr>
+        <tr th:each="row : ${results}">
+          <td><img th:src="${row.foto}"></td>
+          <td th:text="${row.namaProduk}"></td>
+          <td th:text="${row.deskripsi}"></td>
+          <td th:text="${row.Harga}"></td>
+          <td><a th:href="@{/umk/produk/edit(namaProduk=${row.namaProduk})}"><button>Edit</button></a></td>
+        </tr>
+
+      </table>
+    </div>
+  </div>
+
+  <div class="navigation">
+    <div class="dashboard">
+      <img class="icon-dashboard" src="/Assets/umk/daftarProduk/icon-dashboard0.svg" />
+      <p class="nav-transaki"><a th:href="@{/umk/home}">Dashboard</a></p>
+    </div>
+
+    <div class="nav-produk">
+      <img src="/Assets/umk/daftarProduk/icon-produk0.svg" />
+      <p><a th:href="@{/umk/produk}">Produk</a></p>
+    </div>
+
+    <div class="transaksi">
+      <img class="icon-transaksi" src="/Assets/umk/daftarProduk/icon-transaksi0.svg" />
+      <p class="nav-transaksi"><a th:href="@{/umk/transaksi}">Transaksi</a></p>
+    </div>
+
+    <div class="keuangan">
+      <img class="icon-keuangan" src="/Assets/umk/daftarProduk/icon-keuangan0.svg" />
+      <p class="nav-keuangan"><a th:href="@{/umk/keuangan}">Keuangan</a></p>
+    </div>
+
+    <div class="penjualan">
+      <img class="icon-penjualan" src="/Assets/umk/daftarProduk/icon-penjualan0.svg" />
+      <p class="nav-penjualan"><a th:href="@{/umk/penjualan}">Penjualan</a></p>
+    </div>
+
+    <div class="nav-divider">
+      <img class="divider" src="/Assets/umk/daftarProduk/divider0.svg" />
+    </div>
+
+    <div class="log-out">
+      <img class="icon-log-out" src="/Assets/umk/daftarProduk/icon-log-out0.svg" />
+      <p class="nav-log-out">Log Out</p>
+    </div>
+
+    <div class="bantuan">
+      <img class="icon-bantuan" src="/Assets/umk/daftarProduk/icon-bantuan0.svg" />
+      <p class="nav-bantuan">Bantuan</p>
+    </div>
+  </div>
+</body>
+
+</html>
