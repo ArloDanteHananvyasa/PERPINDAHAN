@@ -21,23 +21,24 @@
       <div class="navigation">
         <div class="menu-item dashboard">
           <img class="icon-dashboard" src="/Assets/admin/terlaris/home-20.svg" />
-          <p class="nav-dashboard">Dashboard</p>
+          <p class="nav-dashboard"><a th:href="@{/admin/home}">Dashboard</a></p>
         </div>
 
         <div class="menu-item daftar-umk">
           <img class="icon-daftar-umk" src="/Assets/admin/terlaris/book-030.svg" />
-          <p class="nav-daftar-umk">Daftar UMK</p>
+          <p class="nav-daftar-umk"><a th:href="@{/admin/umk}">Daftar UMK</a></p>
         </div>
 
         <div class="menu-item verifikasi">
           <img class="icon-verifikasi" src="/Assets/admin/terlaris/folder-check0.svg" />
-          <p class="nav-verifikasi">Verifikasi</p>
-          <span class="badge">13</span>
+          <p class="nav-verifikasi"><a th:href="@{/admin/verifikasi}">Verifikasi</a></p>
+          <span class="badge" th:text="${totalUmkTidakTerdaftarBadge}"
+            th:style="|display: ${totalUmkTidakTerdaftarBadge > 0 ? 'inline-block' : 'none'}|"></span>
         </div>
 
         <div class="menu-item penjualan">
           <img class="icon-penjualan" src="/Assets/admin/terlaris/icon-graph0.svg" />
-          <p class="nav-penjualan">Penjualan</p>
+          <p class="nav-penjualan"><a th:href="@{/admin/penjualan}">Penjualan</a></p>
         </div>
 
         <div class="nav-divider">
@@ -59,8 +60,8 @@
     <!-- Header Section -->
     <div class="header">
       <div class="header-navigator">
-        <a class="penjualan-header">Penjualan </a>
-        <a class="UMK-header"> &gt; UMK</a>
+        <a class="penjualan-header" th:href="@{/admin/penjualan}">Penjualan</a>
+        <a class="UMK-header" th:href="@{/admin/penjualan/terlaris}"> &gt; UMK</a>
       </div>
       <img class="profile" src="/Assets/admin/terlaris/generic-avatar0.svg" />
     </div>
@@ -70,8 +71,11 @@
       <div class="sub-header">
         <p class="sub-header-title">Daftar UMK Terlaris</p>
         <div class="input-jumlah-umk">
-          <input type="text" placeholder="Masukkan jumlah yang ingin dicari (1-1000):" />
-          <button type="submit" class="ok-button">OK</button>
+          <form th:action="@{/admin/penjualan/terlaris}" th:method="GET">
+            <input type="text" placeholder="Masukkan jumlah yang ingin dicari (1-1000):" th:value="${filter}"
+              name="filter" />
+            <button type="submit" class="ok-button">OK</button>
+          </form>
         </div>
       </div>
 
@@ -86,22 +90,10 @@
             <td th:text="${row.namaUMK}"></td>
             <td th:text="${row.jumlahTransaksi}"></td>
             <td th:text="${row.totalTransaksi}"></td>
-            <td><button>Detail</button></td>
           </tr>
         </table>
       </div>
     </div>
-
-    <!-- <div class="page-navigation-container">
-      <div class="page-navigation">
-        <p class="_1">1</p>
-        <p class="_2">2</p>
-        <p class="_3">3</p>
-        <p class="_4">4</p>
-        <p class="selanjutnya">Selanjutnya</p>
-        <img class="arrow" src="/Assets/admin/terlaris/arrow0.svg" />
-      </div>
-    </div> -->
   </div>
 </body>
 

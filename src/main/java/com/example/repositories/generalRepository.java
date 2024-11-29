@@ -1,7 +1,10 @@
 package com.example.repositories;
 
-public interface generalRepository {
-    boolean login(String username, String password);
+import com.example.datas.LoginData;
+import com.example.datas.UMKData;
 
-    String getSession();
+public interface generalRepository {
+    LoginData login(String username, String password);
+
+    UMKData getUMK(String noHp);
 }

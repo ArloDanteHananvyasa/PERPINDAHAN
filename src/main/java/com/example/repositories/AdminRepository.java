@@ -2,8 +2,8 @@ package com.example.repositories;
 
 import java.util.List;
 
-import com.example.datas.PenjualanData;
-import com.example.datas.ProdukData;
+import com.example.datas.PenjualanDataAdmin;
+import com.example.datas.ProdukTerjualData;
 import com.example.datas.UMKData;
 
 public interface AdminRepository {
@@ -11,7 +11,13 @@ public interface AdminRepository {
 
     List<UMKData> findVerif();
 
-    List<ProdukData> findTerlaku();
+    List<ProdukTerjualData> findTerlaku();
 
-    List<PenjualanData> findPenjualan();
+    List<PenjualanDataAdmin> findPenjualan();
+
+    List<PenjualanDataAdmin> findPenjualan(int filter);
+
+    UMKData findByNoHp(String hp);
+
+    void verifUMK(int pilihan, int idPendaftaran, String NoHp);
 }

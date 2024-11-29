@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class PenjualanData {
+public class PenjualanDataAdmin {
     private String namaUMK;
     private int jumlahTransaksi;
     private double totalTransaksi;

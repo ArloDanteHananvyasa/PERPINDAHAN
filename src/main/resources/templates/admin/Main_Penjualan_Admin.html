@@ -26,23 +26,24 @@
             <div class="navigation">
                 <div class="menu-item dashboard">
                     <img class="icon-dashboard" src="/Assets/admin/mainPenjualan/home-20.svg" />
-                    <p class="nav-dashboard">Dashboard</p>
+                    <p class="nav-dashboard"><a th:href="@{/admin/home}">Dashboard</a></p>
                 </div>
 
                 <div class="menu-item daftar-umk">
                     <img class="icon-daftar-umk" src="/Assets/admin/mainPenjualan/book-030.svg" />
-                    <p class="nav-daftar-umk">Daftar UMK</p>
+                    <p class="nav-daftar-umk"><a th:href="@{/admin/umk}">Daftar UMK</a></p>
                 </div>
 
                 <div class="menu-item verifikasi">
                     <img class="icon-verifikasi" src="/Assets/admin/mainPenjualan/folder-check0.svg" />
-                    <p class="nav-verifikasi">Verifikasi</p>
-                    <!-- <span class="badge">13</span> -->
+                    <p class="nav-verifikasi"><a th:href="@{/admin/verifikasi}">Verifikasi</a></p>
+                    <span class="badge" th:text="${totalUmkTidakTerdaftarBadge}"
+                        th:style="|display: ${totalUmkTidakTerdaftarBadge > 0 ? 'inline-block' : 'none'}|"></span>
                 </div>
 
                 <div class="menu-item penjualan">
                     <img class="icon-penjualan" src="/Assets/admin/mainPenjualan/icon-graph0.svg" />
-                    <p class="nav-penjualan">Penjualan</p>
+                    <p class="nav-penjualan"><a th:href="@{/admin/penjualan}">Penjualan</a></p>
                 </div>
 
                 <div class="nav-divider">
@@ -66,7 +67,7 @@
                 <img src="/Assets/admin/mainPenjualan/left-img.png" class="left-img">
                 <h2 class="left-section-title">Produk</h2>
             </div>
-            <a th:href="@{/admin/terlaris}">
+            <a th:href="@{/admin/penjualan/terlaris}">
                 <div class="main-right-section">
                     <img src="/Assets/admin/mainPenjualan/right-img.png" class="right-img">
                     <h2 class="right-section-title">UMK</h2>

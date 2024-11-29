@@ -9,6 +9,11 @@
   height: 100vh;
 }
 
+a {
+  text-decoration: none;
+  color: #b1b1b1;
+}
+
 p {
   font-family: "Inter-SemiBold", sans-serif;
   line-height: 100%;
@@ -61,9 +66,10 @@ h3 {
   grid-area: nav;
   background-color: white;
   color: #b1b1b1;
+  text-decoration: none;
 }
 
-.navigation > div {
+.navigation>div {
   display: flex;
   column-gap: 15px;
   align-items: center;
@@ -116,6 +122,7 @@ h3 {
 .quotes {
   color: #343c6a;
 }
+
 .stats {
   display: flex;
   gap: 20px;

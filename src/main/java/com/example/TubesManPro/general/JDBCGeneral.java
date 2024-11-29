@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.datas.LoginData;
+import com.example.datas.UMKData;
 import com.example.repositories.generalRepository;
 
 @Repository
@@ -17,50 +18,68 @@ public class JDBCGeneral implements generalRepository {
     @Autowired
     private JdbcTemplate jdbc;
 
-    private String session;
+    private String role;
 
     @Override
-    public boolean login(String noHp, String password) {
-        String user = this.cekAdminOrUMK(noHp);
-        List<LoginData> res = jdbc.query(
-                "select * from " + user + " where NoHP = '" + noHp + "' AND Pass = '" + password + "'",
-                this::mapRowToLoginData);
+    public LoginData login(String noHp, String password) {
 
-        if (!res.isEmpty()) {
-            return true;
+        this.role = this.cekAdminOrUMK(noHp);
+
+        if (role == null) {
+            return null;
         }
-        return false;
+
+        String query = "SELECT * FROM " + role + " WHERE NoHP = ? AND Pass = ?";
+        List<LoginData> res = jdbc.query(query, this::mapRowToLoginData, noHp, password);
+
+        return res.isEmpty() ? null : res.get(0);
     }
 
     private String cekAdminOrUMK(String noHp) {
-        // String queryCekDaftar = "select * from Administrator where NoHP = '" + noHp +
-        // "'";
-        // List<LoginData> res = jdbc.query(queryCekDaftar, this::mapRowToLoginData);
 
-        // String login = "umk";
-        // if (!res.isEmpty()) {
-        // login = "administrator";
-        // }
+        String adminQuery = "SELECT COUNT(*) FROM Administrator WHERE NoHP = ?";
+        Integer adminCount = jdbc.queryForObject(adminQuery, Integer.class, noHp);
 
-        // this.session = login;
-        // return login;
-        if (noHp.length() > 4) {
-            return "umk";
-        } else {
-            return "administrator";
+        if (adminCount != null && adminCount > 0) {
+            return "Administrator";
         }
 
-        // CHANGE THIS LOGIC
+        String umkQuery = "SELECT COUNT(*) FROM UMK WHERE NoHP = ?";
+        Integer umkCount = jdbc.queryForObject(umkQuery, Integer.class, noHp);
+
+        if (umkCount != null && umkCount > 0) {
+            return "UMK";
+        }
+
+        return null;
+    }
+
+    @Override
+    public UMKData getUMK(String noHp) {
+        List<UMKData> user = jdbc.query("SELECT * FROM umk WHERE NoHP = ?", this::mapRowToUmkData, noHp);
+
+        return user.get(0);
     }
 
     private LoginData mapRowToLoginData(ResultSet resultSet, int rowNum) throws SQLException {
         return new LoginData(
-                resultSet.getString("Nohp"),
-                resultSet.getString("Pass"));
+                resultSet.getString("NoHP"),
+                resultSet.getString("Pass"),
+                this.role);
     }
 
-    public String getSession() {
-        return session;
+    private UMKData mapRowToUmkData(ResultSet resultSet, int rowNum) throws SQLException {
+        return new UMKData(
+                resultSet.getString("nohp"),
+                resultSet.getString("namaumk"),
+                resultSet.getString("deskripsi"),
+                resultSet.getString("logo"),
+                resultSet.getString("alamat"),
+                resultSet.getInt("idpendaftaran"),
+                resultSet.getString("status"),
+                resultSet.getDate("tanggal"),
+                resultSet.getDouble("saldo"),
+                resultSet.getString("namapemilik"),
+                resultSet.getString("email"));
     }
-
 }

@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.datas.PenjualanData;
-import com.example.datas.ProdukData;
+import com.example.datas.LoginData;
+import com.example.datas.PenjualanDataAdmin;
+import com.example.datas.ProdukTerjualData;
 import com.example.datas.UMKData;
 import com.example.repositories.AdminRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
@@ -19,19 +24,26 @@ public class adminController {
 
         @Autowired
         private AdminRepository repo;
+        private LoginData login;
 
         @GetMapping("/home")
-        private String homepage(Model model) {
+        private String homepage(HttpSession session, Model model) {
                 List<UMKData> umkTerdaftar = repo.findAll();
                 List<UMKData> umkTidakTerdaftar = repo.findVerif();
-                List<ProdukData> terlaku = repo.findTerlaku();
-                List<PenjualanData> penjualan = repo.findPenjualan();
+                List<ProdukTerjualData> terlaku = repo.findTerlaku();
+                List<PenjualanDataAdmin> penjualan = repo.findPenjualan();
+
+                this.login = (LoginData) session.getAttribute("loggedInUser");
+
+                if (login == null) {
+                        return "redirect:/login/";
+                }
+
+                model.addAttribute("name", login.getNoHp());
 
                 model.addAttribute("totalUmkTerdaftar", umkTerdaftar.size() + " UMK");
                 model.addAttribute("totalUmkTidakTerdaftar", umkTidakTerdaftar.size() + " UMK");
-                if (umkTidakTerdaftar.size() > 0) {
-                        model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
-                }
+                model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
 
                 if (umkTerdaftar.size() >= 3) {
                         model.addAttribute("UMK1",
@@ -71,8 +83,18 @@ public class adminController {
         }
 
         @GetMapping("/umk")
-        public String daWftarUMK(Model model) {
+        public String daWftarUMK(HttpSession session, Model model) {
+
+                this.login = (LoginData) session.getAttribute("loggedInUser");
+
+                if (login == null) {
+                        return "redirect:/login/";
+                }
+
                 List<UMKData> umk = repo.findAll();
+
+                List<UMKData> umkTidakTerdaftar = repo.findVerif();
+                model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
 
                 model.addAttribute("results", umk);
 
@@ -80,9 +102,28 @@ public class adminController {
 
         }
 
+        @GetMapping("/umk/detail")
+        public String getUMKDetail(@RequestParam("hp") String hp, Model model) {
+                UMKData umkDetail = repo.findByNoHp(hp);
+                model.addAttribute("umkDetail", umkDetail);
+                List<UMKData> umkList = repo.findAll();
+                model.addAttribute("results", umkList);
+                return "admin/DaftarUMK";
+        }
+
         @GetMapping("/verifikasi")
-        public String daftarVerif(Model model) {
+        public String daftarVerif(HttpSession session, Model model) {
+
+                this.login = (LoginData) session.getAttribute("loggedInUser");
+
+                if (login == null) {
+                        return "redirect:/login/";
+                }
+
                 List<UMKData> umk = repo.findVerif();
+
+                List<UMKData> umkTidakTerdaftar = repo.findVerif();
+                model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
 
                 model.addAttribute("results", umk);
 
@@ -90,9 +131,57 @@ public class adminController {
 
         }
 
-        @GetMapping("/terlaris")
-        public String umkTerlaris(Model model) {
-                List<PenjualanData> terlaris = repo.findPenjualan();
+        @PostMapping("/verifikasi/verify")
+        public String verifUMK(
+                        @RequestParam("hp") String hp,
+                        @RequestParam("action") String action,
+                        Model model) {
+
+                UMKData umk = repo.findByNoHp(hp);
+                int idPendaftaran = umk.getIdPendaftaran();
+
+                if ("verify".equals(action)) {
+                        // Perform the verification logic
+                        repo.verifUMK(1, idPendaftaran, hp); // Assuming 1 is the code for verification
+                        model.addAttribute("message", "UMK verified successfully");
+                } else if ("reject".equals(action)) {
+                        // Perform the rejection logic
+                        repo.verifUMK(2, idPendaftaran, hp); // Assuming 2 is the code for rejection
+                        model.addAttribute("message", "UMK rejected");
+                }
+
+                // Redirect to the same verification page to refresh the list
+                return "redirect:/admin/verifikasi";
+        }
+
+        @GetMapping("/penjualan")
+        public String mainPenjualan(HttpSession session, Model model) {
+
+                this.login = (LoginData) session.getAttribute("loggedInUser");
+
+                if (login == null) {
+                        return "redirect:/login/";
+                }
+
+                List<UMKData> umkTidakTerdaftar = repo.findVerif();
+                model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
+                return "admin/Main_Penjualan_Admin";
+
+        }
+
+        @GetMapping("/penjualan/terlaris")
+        public String umkTerlarisWithFilter(@RequestParam(value = "filter", required = false) Integer filter,
+                        Model model) {
+
+                List<PenjualanDataAdmin> terlaris;
+                if (filter != null) {
+                        terlaris = repo.findPenjualan(filter);
+                } else {
+                        terlaris = repo.findPenjualan();
+                }
+
+                List<UMKData> umkTidakTerdaftar = repo.findVerif();
+                model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
 
                 model.addAttribute("results", terlaris);
 
@@ -100,9 +189,4 @@ public class adminController {
 
         }
 
-        @GetMapping("/penjualan")
-        public String mainPenjualan() {
-                return "admin/Main_Penjualan_Admin";
-
-        }
 }

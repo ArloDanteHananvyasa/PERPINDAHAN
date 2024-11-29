@@ -13,6 +13,7 @@ public class UMKData {
     private String deskripsi;
     private String logo;
     private String alamat;
+    private int idPendaftaran;
     private String status;
     private Date tanggal;
     private double saldo;
