@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.datas.KeuanganData;
 import com.example.datas.LoginData;
 import com.example.datas.PenjualanDataUMK;
 import com.example.datas.ProdukData;
@@ -107,4 +108,35 @@ public class umkController {
         return "umk/penjualan";
     }
 
+    @GetMapping("/keuangan")
+    public String keuangan(
+            @RequestParam(value = "transaksiStart", required = false, defaultValue = "1800-01-01") String start,
+            @RequestParam(value = "transaksiEnd", required = false, defaultValue = "2500-12-31") String end,
+            HttpSession session,
+            Model model) {
+
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        Date startDate = Date.valueOf(LocalDate.parse(start));
+        Date endDate = Date.valueOf(LocalDate.parse(end));
+
+        List<KeuanganData> keuangan = repo.findKeuangan(login.getNoHp(), startDate, endDate);
+
+        System.out.println("Start Date: " + startDate);
+        System.out.println("End Date: " + endDate);
+
+        UMKData user = (UMKData) session.getAttribute("umkData");
+        model.addAttribute("profilePic", user.getLogo());
+        model.addAttribute("saldo", user.getSaldo());
+
+        model.addAttribute("results", keuangan);
+        model.addAttribute("transaksiStart", start);
+        model.addAttribute("transaksiEnd", end);
+
+        return "umk/keuangan";
+    }
 }

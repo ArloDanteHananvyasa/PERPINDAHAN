@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.example.datas.KeuanganData;
 import com.example.datas.PenjualanDataUMK;
 import com.example.datas.ProdukData;
 import com.example.repositories.umkRepository;
@@ -57,12 +58,28 @@ public class JDBCumk implements umkRepository {
         return penjualan;
     }
 
+    @Override
+    public List<KeuanganData> findKeuangan(String umk, Date start, Date end) {
+        List<KeuanganData> keuangan = jdbc.query(
+                "SELECT jenis, nominal, Tanggal FROM transaksi JOIN jenistransaksi ON transaksi.IdJenis = jenistransaksi.IdJenis WHERE nohpumk ilike ? AND tanggal >= ? AND tanggal <= ?",
+                this::mapRowToKeuanganData, umk, start, end);
+
+        return keuangan;
+    }
+
     private PenjualanDataUMK mapRowToPenjualanData(ResultSet resultSet, int rowNum) throws SQLException {
         return new PenjualanDataUMK(
                 resultSet.getString("nama"),
                 resultSet.getInt("Akumulasi Jumlah"),
                 resultSet.getDouble("harga"),
                 resultSet.getInt("Akumulasi Jumlah") * resultSet.getDouble("harga"),
+                resultSet.getDate("tanggal"));
+    }
+
+    private KeuanganData mapRowToKeuanganData(ResultSet resultSet, int rowNum) throws SQLException {
+        return new KeuanganData(
+                resultSet.getString("jenis"),
+                resultSet.getDouble("nominal"),
                 resultSet.getDate("tanggal"));
     }
 
