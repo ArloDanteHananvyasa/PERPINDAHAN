@@ -1,0 +1,313 @@
+.page-container {
+  display: grid;
+  grid-template-areas:
+    "logo header"
+    "sidebar main";
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 100px 1fr;
+  height: 100vh;
+  padding: 10px;
+}
+
+p {
+  font-family: "Inter-SemiBold", sans-serif;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h3 {
+  font-family: "Inter-SemiBold", sans-serif;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+}
+
+body {
+  font-family: "Inter-SemiBold", sans-serif;
+  margin: 0;
+}
+
+.logo {
+  grid-area: logo;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-right: 1px solid #b1b1b1;
+  font-size: 28px;
+  font-weight: 600;
+  color: #343c6a;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: white;
+  border-right: 1px solid #b1b1b1;
+  padding: 20px;
+}
+
+.nav-dashboard {
+  color: #0058ea;
+  font-weight: bold;
+}
+
+.navigation {
+  position: relative;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  grid-area: nav;
+  background-color: white;
+  color: #b1b1b1;
+}
+
+.navigation>div {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+}
+
+.navigation img {
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+}
+
+.header {
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: white;
+  border-bottom: 1px solid #b1b1b1;
+}
+
+.dashboard-header {
+  font-weight: 600;
+  font-size: 28px;
+  color: #343c6a;
+}
+
+.main-content {
+  grid-area: main;
+  gap: 20px;
+  padding: 0px 20px;
+  background-color: #f5f7fa;
+  overflow-y: auto;
+}
+
+.sub-header {
+  grid-column: span 2;
+}
+
+.greetings-title {
+  font-weight: 600;
+  font-size: 28px;
+  color: #343c6a;
+  margin-bottom: 0px;
+}
+
+.greetings-quote {
+  font-family: "Inter-Bold", sans-serif;
+  font-size: 15px;
+  color: #343c6a;
+  font-weight: 200;
+}
+
+.stats {
+  display: grid;
+  grid-template-areas: "saldo total-penjualan";
+  grid-template-columns: 1fr 1fr;
+}
+
+.icon-produk-terjual {
+  grid-area: icon;
+  height: 50px;
+}
+
+.produk-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-produk-terjual {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.produk-terjual {
+  font-size: 13px;
+}
+
+.angka-produk-terjual {
+  font-weight: 600;
+  font-size: 28px;
+  color: #343c6a;
+}
+
+.icon-jumlah-produk {
+  grid-area: icon;
+  height: 50px;
+}
+
+.jumlah-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-jumlah-produk {
+  align-self: flex-end;
+}
+
+.angka-jumlah-produk {
+  font-weight: 600;
+  font-size: 28px;
+  color: #343c6a;
+}
+
+.bottom {
+  display: grid;
+  grid-template-areas:
+    "total-produk-terjual transaksi"
+    "jumlah-produk transaksi";
+
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.container-saldo {
+  grid-area: saldo;
+  background-color: white;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid #b1b1b1;
+  display: flex;
+  column-gap: 40px;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-saldo {
+  grid-area: icon;
+}
+
+.logo-saldo {
+  width: 70px;
+}
+
+.saldo-title {
+  align-self: flex-end;
+  font-size: 13px;
+  font-weight: 5;
+}
+
+.nominal-saldo {
+  margin-top: 5px;
+  font-weight: 600;
+  font-size: 28px;
+  color: #343c6a;
+  align-self: flex-start;
+}
+
+.container-total-sales {
+  grid-area: total-penjualan;
+  background-color: white;
+  padding: 10px;
+  margin-right: 20px;
+  border-radius: 25px;
+  border: 1px solid #b1b1b1;
+  display: flex;
+  column-gap: 40px;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+}
+
+.total-sales-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-total-sales {
+  font-size: 13px;
+  font-weight: 5;
+}
+
+.nominal-total-sales {
+  font-weight: 600;
+  font-size: 28px;
+  color: #343c6a;
+  margin-top: 5px;
+}
+
+.icon-total-sales {
+  width: 70px;
+}
+
+.container-produk-terjual {
+  grid-area: total-produk-terjual;
+  background-color: white;
+  padding: 10px;
+  margin-right: 20px;
+  margin-top: 10px;
+  border-radius: 25px;
+  border: 1px solid #b1b1b1;
+  display: flex;
+  column-gap: 10px;
+  width: 250px;
+  height: 90%;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-jumlah-produk {
+  grid-area: jumlah-produk;
+  background-color: white;
+  padding: 10px;
+  margin-top: 40px;
+  border-radius: 25px;
+  border: 1px solid #b1b1b1;
+  display: flex;
+  column-gap: 10px;
+  width: 250px;
+  height: 90%;
+  align-items: center;
+  justify-content: center;
+}
+
+.transaksi-anda {
+  grid-area: transaksi;
+  background-color: white;
+  border-radius: 25px;
+  border: 1px solid #b1b1b1;
+  display: flex;
+  column-gap: 10px;
+  width: 92%;
+  height: 100%;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.rekam-transaksi-btn {
+  display: flex;
+  background-color: #0058ea;
+  border: 1px solid #b1b1b1;
+  border-radius: 15px;
+  width: 100px;
+  height: 50px;
+  padding: 15px 15px;
+  color: white;
+  cursor: pointer;
+  align-items: center;
+}
+
+.yes-transaction.hidden {
+  display: none;
+}

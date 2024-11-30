@@ -17,6 +17,7 @@ import com.example.datas.LoginData;
 import com.example.datas.PenjualanDataUMK;
 import com.example.datas.ProdukData;
 import com.example.datas.UMKData;
+import com.example.repositories.AdminRepository;
 import com.example.repositories.registerRepo;
 import com.example.repositories.umkRepository;
 
@@ -30,6 +31,8 @@ public class umkController {
     private registerRepo regis;
     @Autowired
     private umkRepository repo;
+    @Autowired
+    private AdminRepository admin;
 
     @PostMapping("/submit")
     public String login(@RequestParam(value = "namaUMK") String namaUMK,
@@ -49,6 +52,38 @@ public class umkController {
     @GetMapping("/registrasi")
     public String registerUMK() {
         return "umk/register";
+
+    }
+
+    @GetMapping("/home")
+    public String showHomepage(HttpSession session, Model model) {
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        UMKData user = admin.findByNoHp(login.getNoHp());
+
+        List<PenjualanDataUMK> penjualan = repo.findPenjualan(login.getNoHp(), Date.valueOf("1800-01-01"),
+                Date.valueOf("2500-12-31"));
+        List<ProdukData> produk = repo.findProduk(login.getNoHp());
+
+        long totalBarangTerjual = 0;
+        double totalPenjualan = 0;
+
+        for (PenjualanDataUMK p : penjualan) {
+            totalBarangTerjual += p.getJumlah();
+            totalPenjualan += p.getTotal();
+        }
+
+        model.addAttribute("user", user.getNamaUMK());
+        model.addAttribute("saldo", user.getSaldo());
+        model.addAttribute("totalPenjualan", totalPenjualan);
+        model.addAttribute("totalBarangTerjual", totalBarangTerjual);
+        model.addAttribute("jumlahProduk", produk.size());
+
+        return "umk/homepage";
 
     }
 

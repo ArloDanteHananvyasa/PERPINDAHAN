@@ -165,3 +165,8 @@ button:hover {
   border-radius: 10px;
   padding: 5px;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

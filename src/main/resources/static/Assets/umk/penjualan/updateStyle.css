@@ -10,6 +10,11 @@ body {
   background-color: #f5f7fa;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 p {
   font-family: "Inter-SemiBold", sans-serif;
   line-height: 100%;
@@ -25,9 +30,10 @@ p {
   background-color: white;
   padding: 20px;
   border-right: 1px solid #b1b1b1;
+  color: #b1b1b1;
 }
 
-.navigation > div {
+.navigation>div {
   display: flex;
   column-gap: 15px;
   align-items: center;

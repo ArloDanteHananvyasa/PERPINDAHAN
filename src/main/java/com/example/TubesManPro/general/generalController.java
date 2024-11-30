@@ -28,6 +28,14 @@ public class generalController {
         return "general/LoginPage";
     }
 
+    @GetMapping("/out")
+    public String logout(HttpSession session) {
+
+        session.setAttribute("loggedInUser", null);
+
+        return "general/LoginPage";
+    }
+
     @PostMapping("/verify")
     public String verifyLogin(
             @RequestParam(value = "noHp", required = false) String noHp,
@@ -49,7 +57,7 @@ public class generalController {
 
             // Redirect based on user role
             if ("UMK".equalsIgnoreCase(loggedInUser.getRole())) {
-                return "redirect:/umk/produk";
+                return "redirect:/umk/home";
             } else {
                 return "redirect:/admin/home";
             }

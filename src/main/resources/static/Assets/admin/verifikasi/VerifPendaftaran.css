@@ -165,3 +165,8 @@ button:hover {
   max-width: 600px;
   text-align: left;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
