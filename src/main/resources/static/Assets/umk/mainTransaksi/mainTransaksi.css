@@ -1,0 +1,145 @@
+.page-container {
+    display: grid;
+    grid-template-areas:
+        "logo header"
+        "sidebar main";
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 100px 1fr;
+    height: 100vh;
+}
+
+p {
+    font-family: "Inter-SemiBold", sans-serif;
+    line-height: 100%;
+    letter-spacing: -0.01em;
+}
+
+body {
+    font-family: "Inter-SemiBold", sans-serif;
+
+
+}
+
+.logo {
+    grid-area: logo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-right: 1px solid #b1b1b1;
+    font-size: 28px;
+    font-weight: 600;
+    color: #343c6a;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: white;
+    border-right: 1px solid #b1b1b1;
+    padding: 20px;
+}
+
+.nav-transaksi {
+    color: #0058ea;
+    font-weight: bold;
+}
+
+.navigation {
+    position: relative;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    grid-area: nav;
+    background-color: white;
+    color: #b1b1b1;
+}
+
+.navigation>div {
+    display: flex;
+    column-gap: 15px;
+    align-items: center;
+}
+
+.navigation img {
+    width: 20px;
+    height: 20px;
+    overflow: visible;
+}
+
+.header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: white;
+    border-bottom: 1px solid #b1b1b1;
+}
+
+.dashboard-header {
+    font-weight: 600;
+    font-size: 28px;
+    color: #343c6a;
+}
+
+
+.main-content {
+    display: grid;
+    grid-template-rows: 30px 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "title title"
+        "setorModal tarikModal"
+        "biayaOps penjualan";
+    box-sizing: border-box;
+    gap: 20px;
+    column-gap: 30px;
+    padding: 25px;
+    background-color: #F5F7FA;
+    justify-items: center;
+    justify-content: center;
+}
+
+.title {
+    grid-area: title;
+    font-weight: 600;
+    color: #343c6a;
+    font-size: 26px;
+}
+
+.top-left {
+    grid-area: setorModal;
+}
+
+.top-right {
+    grid-area: tarikModal;
+}
+
+.bottom-left {
+    grid-area: biayaOps;
+}
+
+.bottom-right {
+    grid-area: penjualan;
+}
+
+.main-section {
+    background-color: white;
+    width: 70%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    align-items: center;
+    border: 1px solid #b1b1b1;
+    justify-content: center;
+}
+
+.main-section img {
+    height: 150px
+}
+
+h2 {
+    padding: 10px;
+    margin: 10px;
+}

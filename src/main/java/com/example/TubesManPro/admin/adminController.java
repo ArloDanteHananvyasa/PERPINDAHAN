@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.dataViews.UMKDataView;
 import com.example.datas.LoginData;
 import com.example.datas.PenjualanDataAdmin;
 import com.example.datas.ProdukTerjualData;
@@ -28,8 +29,8 @@ public class adminController {
 
         @GetMapping("/home")
         private String homepage(HttpSession session, Model model) {
-                List<UMKData> umkTerdaftar = repo.findAll();
-                List<UMKData> umkTidakTerdaftar = repo.findVerif();
+                List<UMKDataView> umkTerdaftar = repo.findAll();
+                List<UMKDataView> umkTidakTerdaftar = repo.findVerif();
                 List<ProdukTerjualData> terlaku = repo.findTerlaku();
                 List<PenjualanDataAdmin> penjualan = repo.findPenjualan();
 
@@ -91,9 +92,9 @@ public class adminController {
                         return "redirect:/login/";
                 }
 
-                List<UMKData> umk = repo.findAll();
+                List<UMKDataView> umk = repo.findAll();
 
-                List<UMKData> umkTidakTerdaftar = repo.findVerif();
+                List<UMKDataView> umkTidakTerdaftar = repo.findVerif();
                 model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
 
                 model.addAttribute("results", umk);
@@ -104,9 +105,9 @@ public class adminController {
 
         @GetMapping("/umk/detail")
         public String getUMKDetail(@RequestParam("hp") String hp, Model model) {
-                UMKData umkDetail = repo.findByNoHp(hp);
+                UMKDataView umkDetail = repo.findViewByNoHp(hp);
                 model.addAttribute("umkDetail", umkDetail);
-                List<UMKData> umkList = repo.findAll();
+                List<UMKDataView> umkList = repo.findAll();
                 model.addAttribute("results", umkList);
                 return "admin/DaftarUMK";
         }
@@ -120,15 +121,24 @@ public class adminController {
                         return "redirect:/login/";
                 }
 
-                List<UMKData> umk = repo.findVerif();
+                List<UMKDataView> umk = repo.findVerif();
 
-                List<UMKData> umkTidakTerdaftar = repo.findVerif();
+                List<UMKDataView> umkTidakTerdaftar = repo.findVerif();
                 model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
 
                 model.addAttribute("results", umk);
 
                 return "admin/VerifikasiUMK";
 
+        }
+
+        @GetMapping("/verifikasi/detail")
+        public String getUMKDetailVerif(@RequestParam("hp") String hp, Model model) {
+                UMKDataView umkDetail = repo.findViewByNoHp(hp);
+                model.addAttribute("umkDetail", umkDetail);
+                List<UMKDataView> umkList = repo.findVerif();
+                model.addAttribute("results", umkList);
+                return "admin/VerifikasiUMK";
         }
 
         @PostMapping("/verifikasi/verify")
@@ -163,7 +173,7 @@ public class adminController {
                         return "redirect:/login/";
                 }
 
-                List<UMKData> umkTidakTerdaftar = repo.findVerif();
+                List<UMKDataView> umkTidakTerdaftar = repo.findVerif();
                 model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
                 return "admin/Main_Penjualan_Admin";
 
@@ -180,12 +190,31 @@ public class adminController {
                         terlaris = repo.findPenjualan();
                 }
 
-                List<UMKData> umkTidakTerdaftar = repo.findVerif();
+                List<UMKDataView> umkTidakTerdaftar = repo.findVerif();
                 model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
 
                 model.addAttribute("results", terlaris);
 
                 return "admin/umkTerlaris";
+
+        }
+
+        @GetMapping("/penjualan/terlaku")
+        public String produkTerlaku(@RequestParam(value = "filter", required = false) Integer filter, Model model) {
+
+                List<ProdukTerjualData> terlaku;
+                if (filter != null) {
+                        terlaku = repo.findTerlaku(filter);
+                } else {
+                        terlaku = repo.findTerlaku();
+                }
+
+                List<UMKDataView> umkTidakTerdaftar = repo.findVerif();
+                model.addAttribute("totalUmkTidakTerdaftarBadge", umkTidakTerdaftar.size());
+
+                model.addAttribute("results", terlaku);
+
+                return "admin/produkTerlaku";
 
         }
 

@@ -39,7 +39,11 @@ body {
   padding: 20px;
 }
 
-.nav-verifikasi {
+.icon-daftar-umk {
+  color: #0058ea;
+}
+
+.nav-daftar-umk {
   color: #0058ea;
   font-weight: bold;
 }

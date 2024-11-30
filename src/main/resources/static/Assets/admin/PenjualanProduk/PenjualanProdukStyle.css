@@ -1,3 +1,7 @@
+body {
+  margin: 8px;
+}
+
 /* Grid Layout */
 .page-container {
   display: grid;
@@ -22,6 +26,7 @@ a {
   line-height: 100%;
   letter-spacing: -0.01em;
 }
+
 
 h3 {
   font-family: "Inter-SemiBold", sans-serif;
@@ -69,6 +74,7 @@ h3 {
   grid-area: nav;
   background-color: white;
   color: #b1b1b1;
+  row-gap: 30px;
 }
 
 .navigation>div {
@@ -94,7 +100,8 @@ h3 {
 }
 
 .penjualan-header,
-.UMK-header {
+.UMK-header,
+.symbol {
   font-weight: 600;
   font-size: 28px;
   color: #343c6a;
@@ -124,6 +131,12 @@ h3 {
   font-size: 28px;
   color: #343c6a;
   font-weight: 600;
+}
+
+.sub-header-with-popup {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
 }
 
 .sub-header input {
@@ -180,31 +193,7 @@ table th {
   color: #718ebf;
 }
 
-.page-navigation-container {
-  display: flex;
-  grid-area: page-nav;
-  align-items: flex-start;
-  height: 25%;
-  justify-content: flex-end;
-  padding-right: 25px;
-  background-color: #f5f7fa;
-}
-
-.page-navigation {
-  display: flex;
-  align-items: center;
-  column-gap: 25px;
-  background-color: #f5f7fa;
-  color: #0058ea;
-}
-
-.page-navigation img {
-  width: 15px;
-  height: 15px;
-  overflow: visible;
-}
-
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }

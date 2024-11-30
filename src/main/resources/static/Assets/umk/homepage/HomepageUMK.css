@@ -15,11 +15,6 @@ p {
   letter-spacing: -0.01em;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 h3 {
   font-family: "Inter-SemiBold", sans-serif;
   line-height: 100%;
@@ -177,7 +172,7 @@ body {
     "jumlah-produk transaksi";
 
   grid-template-columns: 300px 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 150px 1fr;
 }
 
 .container-saldo {
@@ -254,14 +249,13 @@ body {
   grid-area: total-produk-terjual;
   background-color: white;
   padding: 10px;
-  margin-right: 20px;
   margin-top: 10px;
   border-radius: 25px;
   border: 1px solid #b1b1b1;
   display: flex;
   column-gap: 10px;
   width: 250px;
-  height: 90%;
+  height: 100px;
   align-items: center;
   justify-content: center;
 }
@@ -270,13 +264,12 @@ body {
   grid-area: jumlah-produk;
   background-color: white;
   padding: 10px;
-  margin-top: 40px;
   border-radius: 25px;
   border: 1px solid #b1b1b1;
   display: flex;
   column-gap: 10px;
   width: 250px;
-  height: 90%;
+  height: 100px;
   align-items: center;
   justify-content: center;
 }
@@ -287,27 +280,87 @@ body {
   border-radius: 25px;
   border: 1px solid #b1b1b1;
   display: flex;
-  column-gap: 10px;
-  width: 92%;
-  height: 100%;
-  margin-top: 10px;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  column-gap: 20px;
+  width: 95%;
+  height: 255px;
+  margin-top: 10px;
+  padding: 10px;
+  justify-content: center;
+}
+
+.right-transaksi,
+.left-transaksi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 5px;
+  font-size: large;
 }
 
 .rekam-transaksi-btn {
-  display: flex;
   background-color: #0058ea;
   border: 1px solid #b1b1b1;
   border-radius: 15px;
-  width: 100px;
+  width: 150px;
   height: 50px;
-  padding: 15px 15px;
   color: white;
   cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.rekam-transaksi-btn:hover {
+  background-color: #0041b5;
 }
 
 .yes-transaction.hidden {
   display: none;
+}
+
+.no-transaction {
+  display: flex;
+  column-gap: 20px;
+}
+
+.yes-transaction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.yes-transaction button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.yes-transaction button:hover {
+  background-color: #218838;
+}
+
+.no-transaction button {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 120px;
+}
+
+.no-transaction button:hover {
+  background-color: #c82333;
 }

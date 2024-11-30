@@ -2,12 +2,15 @@ package com.example.TubesManPro.admin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.example.dataViews.UMKDataView;
 import com.example.datas.PenjualanDataAdmin;
 import com.example.datas.ProdukTerjualData;
 import com.example.datas.UMKData;
@@ -20,10 +23,10 @@ public class JDBCAdmin implements AdminRepository {
     private JdbcTemplate jdbc;
 
     @Override
-    public List<UMKData> findAll() {
-        List<UMKData> umk = jdbc.query(
+    public List<UMKDataView> findAll() {
+        List<UMKDataView> umk = jdbc.query(
                 "SELECT * FROM umk WHERE status = 'Valid'",
-                this::mapRowToUmkData);
+                this::mapRowToUmkDataView);
         return umk;
     }
 
@@ -36,18 +39,35 @@ public class JDBCAdmin implements AdminRepository {
     }
 
     @Override
-    public List<UMKData> findVerif() {
-        List<UMKData> umk = jdbc.query(
+    public UMKDataView findViewByNoHp(String hp) {
+        return jdbc.queryForObject(
+                "SELECT * FROM umk WHERE nohp = ?",
+                this::mapRowToUmkDataView,
+                hp);
+    }
+
+    @Override
+    public List<UMKDataView> findVerif() {
+        List<UMKDataView> umk = jdbc.query(
                 "SELECT * FROM umk WHERE status = 'Belum Diverifikasi' ORDER BY IDPendaftaran",
-                this::mapRowToUmkData);
+                this::mapRowToUmkDataView);
         return umk;
     }
 
     @Override
     public List<ProdukTerjualData> findTerlaku() {
         List<ProdukTerjualData> terlaku = jdbc.query(
-                "SELECT UMK.NoHp, UMK.NamaUMK, Produk.Nama as IdProduk, himpProdukLaku.Kuantitas as Kuantitas FROM (SELECT IdProduk, SUM(Kuantitas) as Kuantitas FROM Nota GROUP BY IdProduk ORDER BY SUM(Kuantitas) DESC LIMIT 3) as himpProdukLaku INNER JOIN Produk ON Produk.IdProduk = himpProdukLaku.IdProduk INNER JOIN ProdukUMK ON ProdukUMK.IdProduk = himpProdukLaku.IdProduk INNER JOIN UMK ON UMK.NoHp = ProdukUMK.NoHpUMK ORDER BY himpProdukLaku.Kuantitas DESC;",
+                "SELECT UMK.NoHp, UMK.NamaUMK, Produk.Nama as IdProduk, himpProdukLaku.Kuantitas as Kuantitas FROM (SELECT IdProduk, SUM(Kuantitas) as Kuantitas FROM Nota GROUP BY IdProduk ORDER BY SUM(Kuantitas) DESC) as himpProdukLaku INNER JOIN Produk ON Produk.IdProduk = himpProdukLaku.IdProduk INNER JOIN ProdukUMK ON ProdukUMK.IdProduk = himpProdukLaku.IdProduk INNER JOIN UMK ON UMK.NoHp = ProdukUMK.NoHpUMK ORDER BY himpProdukLaku.Kuantitas DESC;",
                 this::mapRowToProdukData);
+
+        return terlaku;
+    }
+
+    @Override
+    public List<ProdukTerjualData> findTerlaku(int filter) {
+        List<ProdukTerjualData> terlaku = jdbc.query(
+                "SELECT UMK.NoHp, UMK.NamaUMK, Produk.Nama as IdProduk, himpProdukLaku.Kuantitas as Kuantitas FROM (SELECT IdProduk, SUM(Kuantitas) as Kuantitas FROM Nota GROUP BY IdProduk ORDER BY SUM(Kuantitas) DESC LIMIT ?) as himpProdukLaku INNER JOIN Produk ON Produk.IdProduk = himpProdukLaku.IdProduk INNER JOIN ProdukUMK ON ProdukUMK.IdProduk = himpProdukLaku.IdProduk INNER JOIN UMK ON UMK.NoHp = ProdukUMK.NoHpUMK ORDER BY himpProdukLaku.Kuantitas DESC;",
+                this::mapRowToProdukData, filter);
 
         return terlaku;
     }
@@ -108,19 +128,44 @@ public class JDBCAdmin implements AdminRepository {
                 resultSet.getString("email"));
     }
 
+    private UMKDataView mapRowToUmkDataView(ResultSet resultSet, int rowNum) throws SQLException {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+
+        DecimalFormat decimalFormat = new DecimalFormat("'Rp. '#,###", symbols);
+
+        return new UMKDataView(
+                resultSet.getString("nohp"),
+                resultSet.getString("namaumk"),
+                resultSet.getString("deskripsi"),
+                resultSet.getString("logo"),
+                resultSet.getString("alamat"),
+                resultSet.getInt("idpendaftaran"),
+                resultSet.getString("status"),
+                resultSet.getDate("tanggal"),
+                decimalFormat.format(resultSet.getDouble("saldo")),
+                resultSet.getString("namapemilik"),
+                resultSet.getString("email"));
+    }
+
     private ProdukTerjualData mapRowToProdukData(ResultSet resultSet, int rowNum) throws SQLException {
         return new ProdukTerjualData(
-                resultSet.getString("NoHp"), // Exact alias from query
-                resultSet.getString("NamaUMK"), // Exact alias from query
-                resultSet.getString("IdProduk"), // Exact alias from query
-                resultSet.getInt("Kuantitas")); // Exact alias from query
+                resultSet.getString("NoHp"),
+                resultSet.getString("NamaUMK"),
+                resultSet.getString("IdProduk"),
+                resultSet.getInt("Kuantitas"));
     }
 
     private PenjualanDataAdmin mapRowToPenjualanData(ResultSet resultSet, int rowNum) throws SQLException {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+
+        DecimalFormat decimalFormat = new DecimalFormat("'Rp. '#,###", symbols);
+
         return new PenjualanDataAdmin(
-                resultSet.getString("NamaUMK"), // Exact alias from query
-                resultSet.getInt("Jumlah Transaksi"), // Exact alias from query
-                resultSet.getDouble("Total Transaksi")); // Exact alias from query
+                resultSet.getString("NamaUMK"),
+                resultSet.getInt("Jumlah Transaksi"),
+                decimalFormat.format(resultSet.getDouble("Total Transaksi")));
 
     }
 

@@ -25,24 +25,24 @@
         <div class="sidebar">
             <div class="navigation">
                 <div class="menu-item dashboard">
-                    <img class="icon-dashboard" src="/Assets/admin/verifikasi/icon-dashboard.svg" />
+                    <img class="icon-dashboard" src="/Assets/admin/DaftarUMK/icon-dashboard.svg" />
                     <p class="nav-dashboard"><a th:href="@{/admin/home}">Dashboard</a></p>
                 </div>
 
                 <div class="menu-item daftar-umk">
-                    <img class="icon-daftar-umk" src="/Assets/admin/verifikasi/icon-daftar-umk.svg" />
+                    <img class="icon-daftar-umk" src="/Assets/admin/DaftarUMK/icon-daftar-umk.svg" />
                     <p class="nav-daftar-umk"><a th:href="@{/admin/umk}">Daftar UMK</a></p>
                 </div>
 
                 <div class="menu-item verifikasi">
-                    <img class="icon-verifikasi" src="/Assets/admin/verifikasi/icon-verifikasi.svg" />
+                    <img class="icon-verifikasi" src="/Assets/admin/DaftarUMK/icon-verifikasi.svg" />
                     <p class="nav-verifikasi"><a th:href="@{/admin/verifikasi}">Verifikasi</a></p>
                     <span class="badge" th:text="${totalUmkTidakTerdaftarBadge}"
                         th:style="|display: ${totalUmkTidakTerdaftarBadge > 0 ? 'inline-block' : 'none'}|"></span>
                 </div>
 
                 <div class="menu-item penjualan">
-                    <img class="icon-penjualan" src="/Assets/admin/verifikasi/icon-penjualan.svg" />
+                    <img class="icon-penjualan" src="/Assets/admin/DaftarUMK/icon-penjualan.svg" />
                     <p class="nav-penjualan"><a th:href="@{/admin/penjualan}">Penjualan</a></p>
                 </div>
 
@@ -51,13 +51,8 @@
                 </div>
 
                 <div class="menu-item log-out">
-                    <img class="icon-log-out" src="/Assets/admin/verifikasi/icon-logout.svg" />
-                    <p class="nav-log-out">Log Out</p>
-                </div>
-
-                <div class="menu-item bantuan">
-                    <img class="icon-bantuan" src="/Assets/admin/verifikasi/icon-bantuan.svg" />
-                    <p class="nav-bantuan">Bantuan</p>
+                    <img class="icon-log-out" src="/Assets/admin/DaftarUMK/icon-logout.svg" />
+                    <p class="nav-log-out"><a th:href="@{login/out}">Log Out</a></p>
                 </div>
             </div>
         </div>

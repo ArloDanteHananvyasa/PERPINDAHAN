@@ -52,21 +52,18 @@
 
                 <div class="menu-item log-out">
                     <img class="icon-log-out" src="/Assets/admin/mainPenjualan/logout-040.svg" />
-                    <p class="nav-log-out">Log Out</p>
-                </div>
-
-                <div class="menu-item bantuan">
-                    <img class="icon-bantuan" src="/Assets/admin/mainPenjualan/help-circle-contained0.svg" />
-                    <p class="nav-bantuan">Bantuan</p>
+                    <p class="nav-log-out"><a th:href="@{login/out}">Log Out</a></p>
                 </div>
             </div>
         </div>
 
         <div class="main-content">
-            <div class="main-left-section">
-                <img src="/Assets/admin/mainPenjualan/left-img.png" class="left-img">
-                <h2 class="left-section-title">Produk</h2>
-            </div>
+            <a th:href="@{/admin/penjualan/terlaku}">
+                <div class="main-left-section">
+                    <img src="/Assets/admin/mainPenjualan/left-img.png" class="left-img">
+                    <h2 class="left-section-title">Produk</h2>
+                </div>
+            </a>
             <a th:href="@{/admin/penjualan/terlaris}">
                 <div class="main-right-section">
                     <img src="/Assets/admin/mainPenjualan/right-img.png" class="right-img">

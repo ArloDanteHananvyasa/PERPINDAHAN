@@ -1,6 +1,8 @@
 package com.example.TubesManPro.umk;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,7 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.datas.KeuanganData;
+import com.example.dataViews.KeuanganDataView;
+import com.example.dataViews.PenjualanDataUMKView;
 import com.example.datas.LoginData;
 import com.example.datas.PenjualanDataUMK;
 import com.example.datas.ProdukData;
@@ -77,9 +80,16 @@ public class umkController {
             totalPenjualan += p.getTotal();
         }
 
+        // Create custom DecimalFormatSymbols to use '.' as grouping separator
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+
+        // Apply the custom symbols to the DecimalFormat
+        DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols);
+
         model.addAttribute("user", user.getNamaUMK());
-        model.addAttribute("saldo", user.getSaldo());
-        model.addAttribute("totalPenjualan", totalPenjualan);
+        model.addAttribute("saldo", decimalFormat.format(user.getSaldo()));
+        model.addAttribute("totalPenjualan", decimalFormat.format(totalPenjualan));
         model.addAttribute("totalBarangTerjual", totalBarangTerjual);
         model.addAttribute("jumlahProduk", produk.size());
 
@@ -128,7 +138,7 @@ public class umkController {
         Date startDate = Date.valueOf(LocalDate.parse(start));
         Date endDate = Date.valueOf(LocalDate.parse(end));
 
-        List<PenjualanDataUMK> penjualan = repo.findPenjualan(login.getNoHp(), startDate, endDate);
+        List<PenjualanDataUMKView> penjualan = repo.findPenjualanView(login.getNoHp(), startDate, endDate);
 
         System.out.println("Start Date: " + startDate);
         System.out.println("End Date: " + endDate);
@@ -156,17 +166,19 @@ public class umkController {
             return "redirect:/login/";
         }
 
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setGroupingSeparator('.');
+
+        DecimalFormat decimalFormat = new DecimalFormat("#,###", symbols);
+
         Date startDate = Date.valueOf(LocalDate.parse(start));
         Date endDate = Date.valueOf(LocalDate.parse(end));
 
-        List<KeuanganData> keuangan = repo.findKeuangan(login.getNoHp(), startDate, endDate);
-
-        System.out.println("Start Date: " + startDate);
-        System.out.println("End Date: " + endDate);
+        List<KeuanganDataView> keuangan = repo.findKeuanganView(login.getNoHp(), startDate, endDate);
 
         UMKData user = (UMKData) session.getAttribute("umkData");
         model.addAttribute("profilePic", user.getLogo());
-        model.addAttribute("saldo", user.getSaldo());
+        model.addAttribute("saldo", decimalFormat.format(user.getSaldo()));
 
         model.addAttribute("results", keuangan);
         model.addAttribute("transaksiStart", start);
@@ -174,4 +186,82 @@ public class umkController {
 
         return "umk/keuangan";
     }
+
+    @GetMapping("/transaksi")
+    public String showTransaksi(HttpSession session) {
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        return "umk/transaksi";
+    }
+
+    @GetMapping("/transaksi/setor-modal")
+    public String showSetorModal(HttpSession session) {
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        return "umk/transaksi";
+    }
+
+    @PostMapping("/transaksi/setor-modal/tambah")
+    public String SetorModal(HttpSession session) {
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        return "umk/transaksi";
+    }
+
+    @GetMapping("/transaksi/tarik-modal")
+    public String showTarikModal(HttpSession session) {
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        return "umk/transaksi";
+    }
+
+    @GetMapping("/transaksi/tarik-modal/tambah")
+    public String TarikModal(HttpSession session) {
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        return "umk/transaksi";
+    }
+
+    @GetMapping("/transaksi/penjualan-produk")
+    public String showPenjualanProduk(HttpSession session) {
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        return "umk/transaksi";
+    }
+
+    @GetMapping("/transaksi/biaya-operasional")
+    public String showBiayaOperasional(HttpSession session) {
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        return "umk/transaksi";
+    }
+
 }
