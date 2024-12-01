@@ -92,6 +92,7 @@ public class umkController {
         model.addAttribute("totalPenjualan", decimalFormat.format(totalPenjualan));
         model.addAttribute("totalBarangTerjual", totalBarangTerjual);
         model.addAttribute("jumlahProduk", produk.size());
+        model.addAttribute("logo", user.getLogo());
 
         return "umk/homepage";
 
@@ -187,81 +188,79 @@ public class umkController {
         return "umk/keuangan";
     }
 
-    @GetMapping("/transaksi")
-    public String showTransaksi(HttpSession session) {
+    @GetMapping("/profile")
+    public String showProfile(HttpSession session, Model model) {
         LoginData login = (LoginData) session.getAttribute("loggedInUser");
 
         if (login == null) {
             return "redirect:/login/";
         }
 
-        return "umk/transaksi";
+        UMKData user = admin.findByNoHp(login.getNoHp());
+
+        model.addAttribute("namaUMK", user.getNamaUMK());
+        model.addAttribute("namaPem", user.getNamaPem());
+        model.addAttribute("email", user.getEmail());
+        model.addAttribute("alamat", user.getAlamat());
+        model.addAttribute("deskripsi", user.getDeskripsi());
+        model.addAttribute("nohp", login.getNoHp());
+        model.addAttribute("tanggal", user.getTanggal());
+        model.addAttribute("logo", user.getLogo());
+
+        return "umk/profile";
     }
 
-    @GetMapping("/transaksi/setor-modal")
-    public String showSetorModal(HttpSession session) {
+    @GetMapping("/profile/edit")
+    public String editProfile(HttpSession session, Model model) {
         LoginData login = (LoginData) session.getAttribute("loggedInUser");
 
         if (login == null) {
             return "redirect:/login/";
         }
 
-        return "umk/transaksi";
+        UMKData user = admin.findByNoHp(login.getNoHp());
+
+        model.addAttribute("namaUMK", user.getNamaUMK());
+        model.addAttribute("namaPem", user.getNamaPem());
+        model.addAttribute("email", user.getEmail());
+        model.addAttribute("alamat", user.getAlamat());
+        model.addAttribute("deskripsi", user.getDeskripsi());
+        model.addAttribute("nohp", login.getNoHp());
+        model.addAttribute("tanggal", user.getTanggal());
+        model.addAttribute("logo", user.getLogo());
+
+        return "umk/editProfile";
     }
 
-    @PostMapping("/transaksi/setor-modal/tambah")
-    public String SetorModal(HttpSession session) {
+    @PostMapping("/profile/edit/save")
+    public String editProfileSubmission(
+            @RequestParam(value = "namaUMK", required = false) String namaUMK,
+            @RequestParam(value = "namaPem", required = false) String namaPem,
+            @RequestParam(value = "alamat", required = false) String alamat,
+            @RequestParam(value = "deskripsi", required = false) String deskripsi,
+            @RequestParam(value = "email", required = false) String email,
+            @RequestParam(value = "nohp", required = false) String nohp,
+            HttpSession session, Model model) {
         LoginData login = (LoginData) session.getAttribute("loggedInUser");
 
         if (login == null) {
             return "redirect:/login/";
         }
 
-        return "umk/transaksi";
-    }
+        UMKData user = admin.findByNoHp(login.getNoHp());
 
-    @GetMapping("/transaksi/tarik-modal")
-    public String showTarikModal(HttpSession session) {
-        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+        repo.edit(nohp, namaUMK, namaPem, email, alamat, deskripsi);
 
-        if (login == null) {
-            return "redirect:/login/";
-        }
+        model.addAttribute("namaUMK", user.getNamaUMK());
+        model.addAttribute("namaPem", user.getNamaPem());
+        model.addAttribute("email", user.getEmail());
+        model.addAttribute("alamat", user.getAlamat());
+        model.addAttribute("deskripsi", user.getDeskripsi());
+        model.addAttribute("nohp", login.getNoHp());
+        model.addAttribute("tanggal", user.getTanggal());
+        model.addAttribute("logo", user.getLogo());
 
-        return "umk/transaksi";
-    }
-
-    @GetMapping("/transaksi/tarik-modal/tambah")
-    public String TarikModal(HttpSession session) {
-        LoginData login = (LoginData) session.getAttribute("loggedInUser");
-
-        if (login == null) {
-            return "redirect:/login/";
-        }
-
-        return "umk/transaksi";
-    }
-
-    @GetMapping("/transaksi/penjualan-produk")
-    public String showPenjualanProduk(HttpSession session) {
-        LoginData login = (LoginData) session.getAttribute("loggedInUser");
-
-        if (login == null) {
-            return "redirect:/login/";
-        }
-
-        return "umk/transaksi";
-    }
-
-    @GetMapping("/transaksi/biaya-operasional")
-    public String showBiayaOperasional(HttpSession session) {
-        LoginData login = (LoginData) session.getAttribute("loggedInUser");
-
-        if (login == null) {
-            return "redirect:/login/";
-        }
-
-        return "umk/transaksi";
+        return "umk/profile";
     }
 
 }

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile UMK</title>
+  <link href="/Assets/umk/profile/profileUMKStyle.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="page-container">
+    <div class="logo">
+      <p class="wovey">Wovey<br />Foodcourt .</p>
+    </div>
+
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+      <div class="navigation">
+        <div class="menu-item dashboard">
+          <img class="icon-dashboard" src="/Assets/umk/profile/icon-nav-dashboard0.svg" />
+          <p class="nav-dashboard"><a th:href="@{/umk/home}">Dashboard</a></p>
+        </div>
+
+        <div class="menu-item produk">
+          <img class="icon-produk" src="/Assets/umk/profile/icon-produk.svg" />
+          <p class="nav-produk"><a th:href="@{/umk/produk}">Produk</a></p>
+        </div>
+
+        <div class="menu-item transaksi">
+          <img class="icon-transaksi" src="/Assets/umk/profile/icon-transaksi0.svg" />
+          <p class="nav-transaksi"><a th:href="@{/umk/transaksi}">Transaksi</a></p>
+        </div>
+
+        <div class="menu-item keuangan">
+          <img class="icon-keuangan" src="/Assets/umk/profile/icon-keuangan0.svg" />
+          <p class="nav-keuangan"><a th:href="@{/umk/keuangan}">Keuangan</a></p>
+        </div>
+        <div class="menu-item penjualan">
+          <img class="icon-penjualan" src="/Assets/umk/profile/icon-penjualan.svg" />
+          <p class="nav-penjualan"><a th:href="@{/umk/penjualan}">Penjualan</a></p>
+        </div>
+
+        <div class="nav-divider">
+          <hr class="solid" />
+        </div>
+
+        <div class="menu-item log-out">
+          <img class="icon-log-out" src="/Assets/umk/profile/icon-logout.svg" />
+          <p class="nav-log-out"><a th:href="@{/login/out}">Log Out</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header">
+      <div class="header-text">
+        <p class="profile-header">Profile</p>
+      </div>
+
+      <img class="profile" th:src="${logo}" />
+    </div>
+
+    <div class="main-content">
+      <div class="profile-details">
+        <div class="left-profile">
+          <div class="profile-item">
+            <label>Nama UMK</label>
+            <p th:text="${namaUMK}">Warung Sate Bu Ngantuk</p>
+          </div>
+
+          <div class="profile-item">
+            <label>Nama Pemilik</label>
+            <p th:text="${namaPem}">Turu Asinta</p>
+          </div>
+
+          <div class="profile-item">
+            <label>Email</label>
+            <p th:text="${email}">turu.asinta@gmail.com</p>
+          </div>
+
+          <div class="profile-item">
+            <label>Alamat</label>
+            <p th:text="${alamat}">Jl. Kopo Indah No. 2A, Bandung</p>
+          </div>
+
+          <div class="profile-item">
+            <label>Deskripsi</label>
+            <p th:text="${deskripsi}">Menjual berbagai jenis sate asin dan sate pedas</p>
+          </div>
+        </div>
+        <div class="right-profile">
+          <div class="profile-item">
+            <label>Nomor Telepon</label>
+            <p th:text="${nohp}">08123456789</p>
+          </div>
+          <div class="profile-item">
+            <label>Tanggal Bergabung</label>
+            <p th:text="${tanggal}">1 Januari 2023</p>
+          </div>
+
+          <div class="profile-item">
+            <label>Logo UMK</label>
+            <img th:src="${logo}" class="umk-logo" />
+          </div>
+        </div>
+
+        <div class="edit-profile-btn">
+          <a th:href="@{/umk/profile/edit}"><button type="button" class="submit-button">Edit Profile</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const editButton = document.querySelector(".submit-button");
+
+    editButton.addEventListener("click", function () {
+      window.location.href = "editProfile.html";
+    });
+  </script>
+</body>
+
+</html>

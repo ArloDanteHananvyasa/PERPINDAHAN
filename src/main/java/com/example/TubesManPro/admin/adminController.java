@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,7 +13,6 @@ import com.example.dataViews.UMKDataView;
 import com.example.datas.LoginData;
 import com.example.datas.PenjualanDataAdmin;
 import com.example.datas.ProdukTerjualData;
-import com.example.datas.UMKData;
 import com.example.repositories.AdminRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -133,7 +131,7 @@ public class adminController {
         }
 
         @GetMapping("/verifikasi/detail")
-        public String getUMKDetailVerif(@RequestParam("hp") String hp, Model model) {
+        public String getUMKDetailVerif(@RequestParam(value = "hp") String hp, Model model) {
                 UMKDataView umkDetail = repo.findViewByNoHp(hp);
                 model.addAttribute("umkDetail", umkDetail);
                 List<UMKDataView> umkList = repo.findVerif();
@@ -141,27 +139,28 @@ public class adminController {
                 return "admin/VerifikasiUMK";
         }
 
-        @PostMapping("/verifikasi/verify")
-        public String verifUMK(
-                        @RequestParam("hp") String hp,
-                        @RequestParam("action") String action,
-                        Model model) {
+        @GetMapping("/verifikasi/verify")
+        public String verifUMK(@RequestParam(value = "hp") String hp, Model model) {
+                UMKDataView umkDetail = repo.findViewByNoHp(hp);
+                model.addAttribute("umkDetail", umkDetail);
 
-                UMKData umk = repo.findByNoHp(hp);
-                int idPendaftaran = umk.getIdPendaftaran();
+                repo.verifUMK(1, umkDetail.getIdPendaftaran(), login.getNoHp());
 
-                if ("verify".equals(action)) {
-                        // Perform the verification logic
-                        repo.verifUMK(1, idPendaftaran, hp); // Assuming 1 is the code for verification
-                        model.addAttribute("message", "UMK verified successfully");
-                } else if ("reject".equals(action)) {
-                        // Perform the rejection logic
-                        repo.verifUMK(2, idPendaftaran, hp); // Assuming 2 is the code for rejection
-                        model.addAttribute("message", "UMK rejected");
-                }
+                List<UMKDataView> umkList = repo.findVerif();
+                model.addAttribute("results", umkList);
+                return "admin/VerifikasiUMK";
+        }
 
-                // Redirect to the same verification page to refresh the list
-                return "redirect:/admin/verifikasi";
+        @GetMapping("/verifikasi/reject")
+        public String rejectUMK(@RequestParam(value = "hp") String hp, Model model) {
+                UMKDataView umkDetail = repo.findViewByNoHp(hp);
+                model.addAttribute("umkDetail", umkDetail);
+
+                repo.verifUMK(2, umkDetail.getIdPendaftaran(), login.getNoHp());
+
+                List<UMKDataView> umkList = repo.findVerif();
+                model.addAttribute("results", umkList);
+                return "admin/VerifikasiUMK";
         }
 
         @GetMapping("/penjualan")

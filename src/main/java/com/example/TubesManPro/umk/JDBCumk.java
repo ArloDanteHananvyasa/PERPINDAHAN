@@ -46,6 +46,7 @@ public class JDBCumk implements umkRepository {
 
     private ProdukData mapRowToProdukData(ResultSet resultSet, int rowNum) throws SQLException {
         return new ProdukData(
+                resultSet.getInt("idproduk"),
                 resultSet.getString("nama"),
                 resultSet.getString("deskripsi"),
                 resultSet.getString("foto"),
@@ -87,6 +88,13 @@ public class JDBCumk implements umkRepository {
                 this::mapRowToKeuanganDataView, umk, start, end);
 
         return keuangan;
+    }
+
+    @Override
+    public void edit(String nohp, String namaUMK, String namaPem, String email, String alamat, String deskripsi) {
+        jdbc.update(
+                "UPDATE umk SET nohp=?, namaUMK=?, deskripsi=?, alamat=?, namapemilik=?, email=? WHERE nohp = ?;",
+                nohp, namaUMK, deskripsi, alamat, namaPem, email, nohp);
     }
 
     private PenjualanDataUMK mapRowToPenjualanData(ResultSet resultSet, int rowNum) throws SQLException {

@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daftar UMK</title>
-    <link rel="stylesheet" href="/Assets/admin/DaftarUMK/daftarUmk.css">
+    <link rel="stylesheet" href="/Assets/admin/DaftarUMK/daftarUmk.css" />
 </head>
 
 <body>
     <div class="page-container">
-
         <div class="logo">
             <p class="wovey">Wovey<br />Foodcourt .</p>
         </div>
@@ -26,24 +25,32 @@
             <div class="navigation">
                 <div class="menu-item dashboard">
                     <img class="icon-dashboard" src="/Assets/admin/DaftarUMK/icon-dashboard.svg" />
-                    <p class="nav-dashboard"><a th:href="@{/admin/home}">Dashboard</a></p>
+                    <p class="nav-dashboard">
+                        <a th:href="@{/admin/home}">Dashboard</a>
+                    </p>
                 </div>
 
                 <div class="menu-item daftar-umk">
                     <img class="icon-daftar-umk" src="/Assets/admin/DaftarUMK/icon-daftar-umk.svg" />
-                    <p class="nav-daftar-umk"><a th:href="@{/admin/umk}">Daftar UMK</a></p>
+                    <p class="nav-daftar-umk">
+                        <a th:href="@{/admin/umk}">Daftar UMK</a>
+                    </p>
                 </div>
 
                 <div class="menu-item verifikasi">
                     <img class="icon-verifikasi" src="/Assets/admin/DaftarUMK/icon-verifikasi.svg" />
-                    <p class="nav-verifikasi"><a th:href="@{/admin/verifikasi}">Verifikasi</a></p>
+                    <p class="nav-verifikasi">
+                        <a th:href="@{/admin/verifikasi}">Verifikasi</a>
+                    </p>
                     <span class="badge" th:text="${totalUmkTidakTerdaftarBadge}"
                         th:style="|display: ${totalUmkTidakTerdaftarBadge > 0 ? 'inline-block' : 'none'}|"></span>
                 </div>
 
                 <div class="menu-item penjualan">
                     <img class="icon-penjualan" src="/Assets/admin/DaftarUMK/icon-penjualan.svg" />
-                    <p class="nav-penjualan"><a th:href="@{/admin/penjualan}">Penjualan</a></p>
+                    <p class="nav-penjualan">
+                        <a th:href="@{/admin/penjualan}">Penjualan</a>
+                    </p>
                 </div>
 
                 <div class="nav-divider">
@@ -52,7 +59,12 @@
 
                 <div class="menu-item log-out">
                     <img class="icon-log-out" src="/Assets/admin/DaftarUMK/icon-logout.svg" />
-                    <p class="nav-log-out"><a th:href="@{login/out}">Log Out</a></p>
+                    <p class="nav-log-out">Log Out</p>
+                </div>
+
+                <div class="menu-item bantuan">
+                    <img class="icon-bantuan" src="/Assets/admin/DaftarUMK/icon-bantuan.svg" />
+                    <p class="nav-bantuan">Bantuan</p>
                 </div>
             </div>
         </div>
@@ -72,7 +84,9 @@
                         <td th:text="${row.namaUMK}"></td>
                         <td th:text="${row.namaPem}"></td>
                         <td th:text="${row.tanggal}"></td>
-                        <td><a th:href="@{/admin/umk/detail(hp=${row.hp})}"><button>Detail</button></a></td>
+                        <td>
+                            <a th:href="@{/admin/umk/detail(hp=${row.hp})}"><button>Detail</button></a>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -81,20 +95,55 @@
         <div th:if="${umkDetail != null}" class="modal">
             <div class="modal-content">
                 <h2>Detail UMK</h2>
-                <p><strong>No. HP:</strong> <span th:text="${umkDetail.hp}"></span></p>
-                <p><strong>Nama UMK:</strong> <span th:text="${umkDetail.namaUMK}"></span></p>
-                <p><strong>Deskripsi:</strong> <span th:text="${umkDetail.deskripsi}"></span></p>
-                <p><strong>Logo:</strong> <img th:src="@{${umkDetail.logo}}" alt="Logo UMK"></p>
-                <p><strong>Alamat:</strong> <span th:text="${umkDetail.alamat}"></span></p>
-                <p><strong>Status:</strong> <span th:text="${umkDetail.status}"></span></p>
-                <p><strong>Tanggal:</strong> <span th:text="${umkDetail.tanggal}"></span></p>
-                <p><strong>Saldo:</strong> <span th:text="${umkDetail.saldo}"></span></p>
-                <p><strong>Nama Pemilik:</strong> <span th:text="${umkDetail.namaPem}"></span></p>
-                <p><strong>Email:</strong> <span th:text="${umkDetail.email}"></span></p>
+                <div class="modal-container">
+                    <div class="left-modal">
+                        <p>
+                            <strong>No. HP:</strong><br /><span th:text="${umkDetail.hp}"></span>
+                        </p>
+                        <strong>Nama UMK:</strong><br>
+                        <span th:text="${umkDetail.namaUMK}"></span>
+                        </p>
+                        <p>
+                            <strong>Deskripsi:</strong><br>
+                            <span th:text="${umkDetail.deskripsi}"></span>
+                        </p>
+                        <p>
+                            <strong>Status:</strong><br />
+                            <span th:text="${umkDetail.status}"></span>
+                        </p>
+                        <p>
+                            <strong>Tanggal:</strong><br />
+                            <span th:text="${umkDetail.tanggal}"></span>
+                        </p>
+                        <p>
+                            <strong>Saldo:</strong><br />
+                            <span th:text="${umkDetail.saldo}"></span>
+                        </p>
+                    </div>
+
+                    <div class="right-modal">
+                        <p>
+                            <strong>Nama Pemilik:</strong><br />
+                            <span th:text="${umkDetail.namaPem}"></span>
+                        </p>
+                        <p>
+                            <strong>Email:</strong><br />
+                            <span th:text="${umkDetail.email}"></span>
+                        </p>
+                        <p>
+                            <strong>Alamat:</strong><br />
+                            <span th:text="${umkDetail.alamat}"></span>
+                        </p>
+                        <p>
+                            <strong>Logo:</strong><br />
+                            <img th:src="@{${umkDetail.logo}}" alt="Logo UMK" />
+                        </p>
+                    </div>
+                </div>
                 <a href="/admin/umk" class="close-button"><button>Close</button></a>
             </div>
         </div>
-
+    </div>
 </body>
 
 </html>

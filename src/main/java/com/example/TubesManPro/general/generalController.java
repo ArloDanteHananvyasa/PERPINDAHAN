@@ -52,6 +52,15 @@ public class generalController {
 
             if (loggedInUser.getRole().equalsIgnoreCase("umk")) {
                 UMKData user = repo.getUMK(noHp);
+
+                if (user.getStatus().equalsIgnoreCase("Ditolak")) {
+                    model.addAttribute("error", "Pendaftaran Anda ditolak oleh admin");
+                    return "general/LoginPage";
+                } else if (user.getStatus().equalsIgnoreCase("Belum Diverifikasi")) {
+                    model.addAttribute("error", "Akun anda belum diverifikasi oleh admin");
+                    return "general/LoginPage";
+                }
+
                 session.setAttribute("umkData", user);
             }
 
@@ -64,7 +73,8 @@ public class generalController {
         } else {
             model.addAttribute("noHp", "");
             model.addAttribute("password", "");
-            return "login";
+            model.addAttribute("error", "Akun anda tidak terdaftar");
+            return "general/LoginPage";
         }
     }
 

@@ -21,4 +21,6 @@ public interface umkRepository {
     List<PenjualanDataUMKView> findPenjualanView(String umk, Date start, Date end);
 
     List<KeuanganDataView> findKeuanganView(String umk, Date start, Date end);
+
+    void edit(String nohp, String namaUMK, String namaPem, String email, String alamat, String deskripsi);
 }

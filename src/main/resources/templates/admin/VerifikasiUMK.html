@@ -80,7 +80,8 @@
                         <td th:text="${row.tanggal}"></td>
                         <td><a th:href="@{/admin/verifikasi/detail(hp=${row.hp})}"><button
                                     class="detail-btn">Detail</button></a></td>
-                        <td><button class="verify-btn" data-hp="${row.hp}" data-nama="${row.namaUMK}">Verify</button>
+                        <td><button class="verify-btn" th:attr="data-hp=${row.hp}"
+                                data-nama="${row.namaUMK}">Verify</button>
                         </td>
 
                     </tr>
@@ -110,13 +111,13 @@
                 <h2>Verifikasi UMK</h2>
                 <p>Apakah Anda yakin ingin memverifikasi UMK ini?</p>
                 <!-- Form for Verifikasi -->
-                <form id="verificationForm" th:action="@{/admin/verifikasi/verify}" method="POST">
+                <form id="verificationForm" th:action="@{/admin/verifikasi/verify}" method="get">
                     <input type="hidden" name="hp" id="modalHp">
                     <input type="hidden" name="action" value="verify"> <!-- Action for verification -->
                     <button type="submit" id="acceptBtn">Verifikasi</button>
                 </form>
                 <!-- Form for Reject -->
-                <form id="rejectionForm" th:action="@{/admin/verifikasi/verify}" method="POST">
+                <form id="rejectionForm" th:action="@{/admin/verifikasi/reject}" method="get">
                     <input type="hidden" name="hp" id="modalHpReject">
                     <input type="hidden" name="action" value="reject"> <!-- Action for rejection -->
                     <button type="submit" id="rejectBtn">Tolak</button>
@@ -126,29 +127,37 @@
         </div>
 
         <script>
-            const verificationModal = document.getElementById('verificationModal');
-            const verifikasiBtns = document.querySelectorAll('.verify-btn');
-            const closeModalBtn = document.getElementById('closeModalBtn');
+            document.addEventListener("DOMContentLoaded", function () {
+                const verifyButtons = document.querySelectorAll('.verify-btn');
+                const verificationModal = document.getElementById('verificationModal');
+                const closeModalBtn = document.getElementById('closeModalBtn');
 
-            // Add event listener for each "Verify" button
-            verifikasiBtns.forEach(button => {
-                button.addEventListener('click', function () {
-                    // Get the data attributes from the clicked button
-                    const hp = this.getAttribute('data-hp');
-                    const namaUMK = this.getAttribute('data-nama');
+                // Add event listeners to all the verify buttons
+                verifyButtons.forEach(function (button) {
+                    button.addEventListener('click', function (event) {
+                        const hp = event.target.getAttribute('data-hp');
+                        const namaUMK = event.target.getAttribute('data-nama');
 
-                    // Set the hp value for both forms (for verification and rejection)
-                    document.getElementById('modalHp').value = hp;
-                    document.getElementById('modalHpReject').value = hp;
+                        // Populate the modal's hidden inputs with the correct data
+                        document.getElementById('modalHp').value = hp;
+                        document.getElementById('modalHpReject').value = hp;
 
-                    // Open the modal
-                    verificationModal.style.display = 'block';
+                        // Show the modal
+                        verificationModal.style.display = 'block';
+                    });
                 });
-            });
 
-            // Close the modal
-            closeModalBtn.addEventListener('click', function () {
-                verificationModal.style.display = 'none';
+                // Close modal when close button is clicked
+                closeModalBtn.addEventListener('click', function () {
+                    verificationModal.style.display = 'none';
+                });
+
+                // Close modal when clicked outside the modal
+                window.addEventListener('click', function (event) {
+                    if (event.target === verificationModal) {
+                        verificationModal.style.display = 'none';
+                    }
+                });
             });
         </script>
 </body>

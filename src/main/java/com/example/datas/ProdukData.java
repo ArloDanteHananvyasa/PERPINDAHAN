@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProdukData {
+    private int idProduk;
     private String namaProduk;
     private String deskripsi;
     private String foto;

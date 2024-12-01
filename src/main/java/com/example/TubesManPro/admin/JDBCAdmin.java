@@ -91,24 +91,18 @@ public class JDBCAdmin implements AdminRepository {
     }
 
     @Override
-    public void verifUMK(int pilihan, int idPendaftaran, String noHp) {
+    public void verifUMK(int pilihan, int idPendaftaran, String nohp) {
         if (pilihan == 1) {
-            // Accept UMK (validating it)
-            String queryValidasiUMK = "UPDATE UMK SET Status = 'Valid' WHERE IdPendaftaran = " + idPendaftaran;
-            jdbc.update(queryValidasiUMK);
+            jdbc.update("UPDATE umk SET Status = 'Valid' WHERE idpendaftaran = ?", idPendaftaran);
 
-            String queryValidasiPendaftaran = "UPDATE Pendaftaran SET Status = 'Valid', NoHpAdmin = '" + noHp
-                    + "' WHERE IdPendaftaran = " + idPendaftaran;
-            jdbc.update(queryValidasiPendaftaran);
+            jdbc.update("UPDATE Pendaftaran SET Status = 'Valid', NoHpAdmin = ? WHERE IdPendaftaran = ?", nohp,
+                    idPendaftaran);
 
         } else if (pilihan == 2) {
-            // Reject UMK
-            String queryTolakUMK = "UPDATE UMK SET Status = 'Ditolak' WHERE IdPendaftaran = " + idPendaftaran;
-            jdbc.update(queryTolakUMK);
+            jdbc.update("UPDATE umk SET Status = 'Ditolak' WHERE idpendaftaran = ?", idPendaftaran);
 
-            String queryTolakPendaftaran = "UPDATE Pendaftaran SET Status = 'Ditolak', NoHpAdmin = '" + noHp
-                    + "' WHERE IdPendaftaran = " + idPendaftaran;
-            jdbc.update(queryTolakPendaftaran);
+            jdbc.update("UPDATE Pendaftaran SET Status = 'Ditolak', NoHpAdmin = ? WHERE IdPendaftaran = ?", nohp,
+                    idPendaftaran);
 
         }
     }

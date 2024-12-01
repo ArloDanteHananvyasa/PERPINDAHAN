@@ -174,6 +174,10 @@
             font-family: "Inter-Regular", sans-serif;
             cursor: pointer;
         }
+
+        .error {
+            color: red;
+        }
     </style>
 </head>
 
@@ -198,6 +202,7 @@
                     <input type="password" name="password" th:value="${password}" placeholder="**********">
                 </div>
                 <br>
+                <p class="error" th:text="${error}"></p>
                 <div class="item5">
                     <input type="submit" value="LOGIN" class="login-button"></input>
                 </div>

@@ -16,8 +16,6 @@ p {
 
 body {
   font-family: "Inter-SemiBold", sans-serif;
-
-
 }
 
 .logo {
@@ -120,12 +118,12 @@ table th {
 }
 
 button {
-  background-color: #007BFF;
+  background-color: #0058ea;
   text-decoration: none;
   color: white;
   font-size: 14px;
   padding: 10px 20px;
-  border-radius: 15px;
+  border-radius: 5px;
   border: none;
   transition: all 0.3s ease;
 }
@@ -137,8 +135,9 @@ button.detail-btn {
 }
 
 button:hover {
-  background-color: #86a4ff;
+  background-color: #0041b5;
   color: #fafcfe;
+  cursor: pointer;
 }
 
 .modal {
@@ -152,6 +151,20 @@ button:hover {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+}
+
+h2 {
+  color: #343c6a;
+  margin-top: 0px;
+}
+
+strong {
+  color: #343c6a;
+}
+
+.modal-container {
+  display: flex;
+  column-gap: 30px;
 }
 
 .modal-content {
@@ -173,4 +186,9 @@ button:hover {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.modal-content img {
+  width: 150px;
+  height: 150px;
 }

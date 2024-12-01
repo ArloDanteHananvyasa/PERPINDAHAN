@@ -64,24 +64,31 @@
             <div class="title">
                 Jenis Transaksi yang Ingin Ditambahkan
             </div>
-            <div class="main-section top-left">
-                <img src="/Assets/umk/mainTransaksi/modal.png" class="top-left-img">
-                <h2 class="top-left-section-title">Setor Modal</h2>
-            </div>
-            <div class="main-section top-right">
-                <img src="/Assets/umk/mainTransaksi/tarik-modal.png" class="top-right-img">
-                <h2 class="top-right-section-title">Tarik Modal</h2>
-            </div>
-            <div class="main-section bottom-left">
-                <img src="/Assets/umk/mainTransaksi/biaya-operasional.png" class="bottom-left-img">
-                <h2 class="bottom-left-section-title">Biaya Operasional</h2>
-            </div>
-            <div class="main-section bottom-right">
-                <img src="/Assets/umk/mainTransaksi/penjualan.png" class="bottom-right-img">
-                <h2 class="bottom-right-section-title">Penjualan</h2>
-            </div>
+            <a th:href="@{/umk/transaksi/setor-modal}">
+                <div class="main-section top-left">
+                    <img src="/Assets/umk/mainTransaksi/modal.png" class="top-left-img">
+                    <h2 class="top-left-section-title">Setor Modal</h2>
+                </div>
+            </a>
+            <a th:href="@{/umk/transaksi/tarik-modal}">
+                <div class="main-section top-right">
+                    <img src="/Assets/umk/mainTransaksi/tarik-modal.png" class="top-right-img">
+                    <h2 class="top-right-section-title">Tarik Modal</h2>
+                </div>
+            </a>
+            <a th:href="@{/umk/transaksi/biaya-operasional}">
+                <div class="main-section bottom-left">
+                    <img src="/Assets/umk/mainTransaksi/biaya-operasional.png" class="bottom-left-img">
+                    <h2 class="bottom-left-section-title">Biaya Operasional</h2>
+                </div>
+            </a>
+            <a th:href="@{/umk/transaksi/penjualan-produk}">
+                <div class="main-section bottom-right">
+                    <img src="/Assets/umk/mainTransaksi/penjualan.png" class="bottom-right-img">
+                    <h2 class="bottom-right-section-title">Penjualan</h2>
+                </div>
+            </a>
         </div>
-
     </div>
 </body>
 
