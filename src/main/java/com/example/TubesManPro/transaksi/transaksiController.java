@@ -79,11 +79,11 @@ public class transaksiController {
         System.out.println("Tanggal: " + tanggal);
         System.out.println("Nominal: " + nominal);
 
-        UMKDataView userView = admin.findViewByNoHp(login.getNoHp());
-
         Date date = Date.valueOf(LocalDate.parse(tanggal));
 
         repo.setorModal(date, nominal, login.getNoHp());
+
+        UMKDataView userView = admin.findViewByNoHp(login.getNoHp());
 
         model.addAttribute("saldo", userView.getSaldo());
         model.addAttribute("nominal", "");
@@ -132,6 +132,8 @@ public class transaksiController {
         }
 
         repo.tarikModal(date, nominal, rekening, login.getNoHp());
+
+        userView = admin.findViewByNoHp(login.getNoHp());
 
         model.addAttribute("saldo", userView.getSaldo());
         model.addAttribute("nominal", "");
@@ -213,6 +215,11 @@ public class transaksiController {
         System.out.println("Cart contents:" + cart);
         repo.penjualanProduk(cart, login.getNoHp());
 
+        UMKDataView userView = admin.findViewByNoHp(login.getNoHp());
+
+        model.addAttribute("saldo", userView.getSaldo());
+        model.addAttribute("success", true);
+
         return "umk/transaksi";
     }
 
@@ -255,6 +262,8 @@ public class transaksiController {
         }
 
         repo.biayaOperasional(date, nominal, login.getNoHp());
+
+        userView = admin.findViewByNoHp(login.getNoHp());
 
         model.addAttribute("saldo", userView.getSaldo());
         model.addAttribute("nominal", "");

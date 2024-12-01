@@ -364,3 +364,8 @@ body {
 .no-transaction button:hover {
   background-color: #c82333;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

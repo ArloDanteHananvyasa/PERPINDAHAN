@@ -453,3 +453,8 @@ table th {
     padding: 10px 10px;
     color: #718ebf;
 }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}

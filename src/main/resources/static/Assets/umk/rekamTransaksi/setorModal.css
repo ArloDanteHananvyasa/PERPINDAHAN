@@ -408,3 +408,8 @@ button {
 #nominal {
     width: 90%;
 }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}

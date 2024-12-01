@@ -404,3 +404,8 @@ button {
 .overlay-content p {
     margin: 0;
 }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
