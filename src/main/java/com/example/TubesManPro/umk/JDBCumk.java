@@ -91,10 +91,11 @@ public class JDBCumk implements umkRepository {
     }
 
     @Override
-    public void edit(String nohp, String namaUMK, String namaPem, String email, String alamat, String deskripsi) {
+    public void edit(String newHP, String namaUMK, String namaPem, String email, String alamat, String deskripsi,
+            String oldHP) {
         jdbc.update(
                 "UPDATE umk SET nohp=?, namaUMK=?, deskripsi=?, alamat=?, namapemilik=?, email=? WHERE nohp = ?;",
-                nohp, namaUMK, deskripsi, alamat, namaPem, email, nohp);
+                newHP, namaUMK, deskripsi, alamat, namaPem, email, oldHP);
     }
 
     private PenjualanDataUMK mapRowToPenjualanData(ResultSet resultSet, int rowNum) throws SQLException {

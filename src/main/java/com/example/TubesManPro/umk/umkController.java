@@ -123,6 +123,53 @@ public class umkController {
         return "umk/daftarProduk";
     }
 
+    @GetMapping("/produk/edit")
+    public String editProduk(@RequestParam(value = "namaProduk") String namaProduk, HttpSession session, Model model) {
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        ProdukData produk = repo.findProduk(login.getNoHp(), namaProduk).get(0);
+
+        System.out.println("Nama Produk: " + produk.getNamaProduk());
+        System.out.println("Deskripsi: " + produk.getDeskripsi());
+        System.out.println("Harga: " + produk.getHarga());
+        System.out.println("Foto: " + produk.getFoto());
+
+        model.addAttribute("namaProduk", produk.getNamaProduk());
+        model.addAttribute("deskripsi", produk.getDeskripsi());
+        model.addAttribute("harga", produk.getHarga());
+        model.addAttribute("foto", produk.getFoto());
+
+        return "umk/editProduk";
+    }
+
+    @PostMapping("/produk/edit/submit")
+    public String editProdukSubmit(@RequestParam(value = "namaProduk") String namaProduk, HttpSession session,
+            Model model) {
+        LoginData login = (LoginData) session.getAttribute("loggedInUser");
+
+        if (login == null) {
+            return "redirect:/login/";
+        }
+
+        ProdukData produk = repo.findProduk(login.getNoHp(), namaProduk).get(0);
+
+        System.out.println("Nama Produk: " + produk.getNamaProduk());
+        System.out.println("Deskripsi: " + produk.getDeskripsi());
+        System.out.println("Harga: " + produk.getHarga());
+        System.out.println("Foto: " + produk.getFoto());
+
+        model.addAttribute("namaProduk", produk.getNamaProduk());
+        model.addAttribute("deskripsi", produk.getDeskripsi());
+        model.addAttribute("harga", produk.getHarga());
+        model.addAttribute("foto", produk.getFoto());
+
+        return "umk/editProduk";
+    }
+
     @GetMapping("/penjualan")
     public String penjualan(
             @RequestParam(value = "transaksiStart", required = false, defaultValue = "1800-01-01") String start,
@@ -220,6 +267,8 @@ public class umkController {
 
         UMKData user = admin.findByNoHp(login.getNoHp());
 
+        System.out.println(user);
+
         model.addAttribute("namaUMK", user.getNamaUMK());
         model.addAttribute("namaPem", user.getNamaPem());
         model.addAttribute("email", user.getEmail());
@@ -249,7 +298,24 @@ public class umkController {
 
         UMKData user = admin.findByNoHp(login.getNoHp());
 
-        repo.edit(nohp, namaUMK, namaPem, email, alamat, deskripsi);
+        if (nohp == null || nohp.isEmpty()) {
+            model.addAttribute("error", "Nomor HP tidak boleh kosong!");
+
+            model.addAttribute("namaUMK", user.getNamaUMK());
+            model.addAttribute("namaPem", user.getNamaPem());
+            model.addAttribute("email", user.getEmail());
+            model.addAttribute("alamat", user.getAlamat());
+            model.addAttribute("deskripsi", user.getDeskripsi());
+            model.addAttribute("nohp", login.getNoHp());
+            model.addAttribute("tanggal", user.getTanggal());
+            model.addAttribute("logo", user.getLogo());
+
+            return "umk/editProfile";
+        }
+
+        repo.edit(nohp, namaUMK, namaPem, email, alamat, deskripsi, login.getNoHp());
+
+        user = admin.findByNoHp(login.getNoHp());
 
         model.addAttribute("namaUMK", user.getNamaUMK());
         model.addAttribute("namaPem", user.getNamaPem());

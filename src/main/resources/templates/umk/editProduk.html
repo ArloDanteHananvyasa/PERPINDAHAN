@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="/Assets/umk/editProduk/editProduk.js" defer></script>
+  <link rel="stylesheet" href="/Assets/umk/editProduk/editProduk.css" />
+  <title>Edit Produk UMK</title>
+</head>
+
+<body>
+  <div class="page-container">
+    <div class="logo">
+      <p class="wovey">Wovey<br />Foodcourt .</p>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header">
+      <p class="dashboard-header">Produk</p>
+      <a th:href="@{/umk/profile}"><img class="profile" th:src="${profilePic}" /></a>
+    </div>
+
+    <div class="sidebar">
+      <div class="navigation">
+        <div class="menu-item dashboard">
+          <img class="icon-dashboard" src="/Assets/umk/daftarProduk/icon-dashboard0.svg" />
+          <p class="nav-transaki"><a th:href="@{/umk/home}">Dashboard</a></p>
+        </div>
+
+        <div class="menu-item produk">
+          <img src="/Assets/umk/daftarProduk/icon-produk0.svg" />
+          <p><a th:href="@{/umk/produk}">Produk</a></p>
+        </div>
+
+        <div class="menu-item transaksi">
+          <img class="icon-transaksi" src="/Assets/umk/daftarProduk/icon-transaksi0.svg" />
+          <p class="nav-transaksi">
+            <a th:href="@{/umk/transaksi}">Transaksi</a>
+          </p>
+        </div>
+
+        <div class="menu-item keuangan">
+          <img class="icon-keuangan" src="/Assets/umk/daftarProduk/icon-keuangan0.svg" />
+          <p class="nav-keuangan">
+            <a th:href="@{/umk/keuangan}">Keuangan</a>
+          </p>
+        </div>
+        <div class="menu-item penjualan">
+          <img class="icon-penjualan" src="/Assets/umk/daftarProduk/icon-penjualan0.svg" />
+          <p class="nav-penjualan">
+            <a th:href="@{/umk/penjualan}">Penjualan</a>
+          </p>
+        </div>
+
+        <div class="nav-divider">
+          <img class="divider" src="/Assets/umk/daftarProduk/divider0.svg" />
+        </div>
+
+        <div class="menu-item log-out">
+          <img class="icon-log-out" src="/Assets/umk/daftarProduk/icon-log-out0.svg" />
+          <p class="nav-log-out"><a th:href="@{login/out}">Log Out</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="header-text">
+        <p class="profile-header" id="profile">Produk</p>
+        <p class="profile-header">&gt;</p>
+        <p class="profile-header" id="editProfile">Edit Produk</p>
+      </div>
+      <img class="profile" src="assets/generic-avatar0.svg" />
+    </div>
+
+    <div class="main-content">
+      <p class="sub-header">Edit Produk</p>
+      <div class="profile-details">
+        <form class="profile-form" id="input-form" th:action="@{/umk/produk/edit/submit}" th:method="post">
+          <div class="left-profile">
+            <div class="profile-item">
+              <label for="nama-produk">Nama Produk</label>
+              <input type="text" id="nama-produk" name="nama-produk" th:value="${namaProduk}" required />
+            </div>
+
+            <div class="profile-item">
+              <label for="deskripsi">Deskripsi</label>
+              <textarea id="deskripsi" name="deskripsi" th:text="${deskripsi}" required></textarea>
+            </div>
+          </div>
+
+          <div class="right-profile">
+            <div class="profile-item">
+              <label for="harga">Masukkan Harga:</label>
+              <input type="number" id="harga" name="harga" th:value="${harga}" min="0" step="250" required />
+            </div>
+            <div class="profile-logo">
+              <label for="foto-produk">Foto Produk</label>
+              <input type="file" id="foto-produk" name="foto-produk" accept="image/*" />
+            </div>
+            <div class="current-photo">
+              <label for="foto-produk">Foto Produk Sekarang</label>
+              <img th:src="${foto}" alt="Foto Produk" id="foto-produk">
+            </div>
+          </div>
+
+          <!-- Save Changes Button -->
+          <div class="edit-profile-btn">
+            <input type="submit" class="submit-button" value="Simpan Perubahan">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

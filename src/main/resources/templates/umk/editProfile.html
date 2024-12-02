@@ -120,12 +120,12 @@
           <div class="left-profile">
             <div class="profile-item">
               <label for="nama-umk">Nama UMK</label>
-              <input type="text" id="nama-umk" name="nama-umk" th:value="${namaUMK}" />
+              <input type="text" id="nama-umk" name="namaUMK" th:value="${namaUMK}" />
             </div>
 
             <div class="profile-item">
               <label for="nama-pemilik">Nama Pemilik</label>
-              <input type="text" id="nama-pemilik" name="nama-pemilik" th:value="${namaPem}" />
+              <input type="text" id="nama-pemilik" name="namaPem" th:value="${namaPem}" />
             </div>
 
             <div class="profile-item">
@@ -146,7 +146,8 @@
             </div>
             <div class="profile-item">
               <label for="nomor-telepon">Nomor Telepon</label>
-              <input type="text" id="nomor-telepon" name="nomor-telepon" th:value="${nohp}" />
+              <input type="text" id="nomor-telepon" name="nohp" th:value="${nohp}" />
+              <p style="color: red;" th:text="${error}"></p>
             </div>
 
             <div class="profile-logo">
@@ -157,8 +158,8 @@
 
           <!-- Save Changes Button -->
           <div class="edit-profile-btn">
-            <button type="button" class="submit-button">
-              Simpan Perubahan
+            <input type="submit" class="submit-button">
+            Simpan Perubahan
             </button>
           </div>
         </form>
@@ -167,15 +168,15 @@
   </div>
 
   <!-- Overlay -->
-  <div id="regis-sent" class="overlay hidden">
+  <!-- <div id="regis-sent" class="overlay hidden">
     <div class="overlay-content">
-      <!-- <img src="check-icon0.png" alt="Check Icon" class="check-icon" /> -->
+      <img src="check-icon0.png" alt="Check Icon" class="check-icon" />
       <h1>Apakah anda yakin ingin menyimpan perubahan?</h1>
       <p>Cek kembali masukan anda!</p>
       <button type="submit" class="yes-btn" id="confirm-yes">Ya</button>
       <button class="no-btn" id="confirm-no">Tidak</button>
     </div>
-  </div>
+  </div> -->
 </body>
 
 </html>

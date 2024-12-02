@@ -1,0 +1,269 @@
+.page-container {
+  display: grid;
+  grid-template-areas:
+    "logo header"
+    "sidebar main";
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 100px 1fr;
+  height: 100vh;
+}
+p {
+  font-family: "Inter-SemiBold", sans-serif;
+  line-height: 100%;
+  letter-spacing: -0.01em;
+}
+
+body {
+  font-family: "Inter-SemiBold", sans-serif;
+  margin: 0;
+}
+.logo {
+  grid-area: logo;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-right: 1px solid #b1b1b1;
+  font-size: 28px;
+  font-weight: 600;
+  color: #343c6a;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: white;
+  border-right: 1px solid #b1b1b1;
+  padding: 20px;
+}
+
+.produk {
+  color: #0058ea;
+  font-weight: bold;
+}
+
+.navigation {
+  position: relative;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  grid-area: nav;
+  background-color: white;
+  color: #b1b1b1;
+}
+
+.navigation > div {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+}
+
+.navigation > div:hover {
+  text-decoration: underline;
+}
+
+.navigation img {
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+}
+
+.header {
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: white;
+  border-bottom: 1px solid #b1b1b1;
+}
+
+.profile-header {
+  font-weight: 600;
+  font-size: 28px;
+  color: #343c6a;
+}
+
+.header-text {
+  display: flex;
+  column-gap: 10px;
+}
+
+#profile:hover,
+#editProfile:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.main-content {
+  grid-area: main;
+  padding: 0px 20px;
+  background-color: #f5f7fa;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-header {
+  font-weight: 600;
+  font-size: 25px;
+  color: #343c6a;
+  padding-left: 15px;
+  margin-bottom: 0px;
+}
+
+.profile-details {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  margin: 20px;
+  height: fit-content;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.left-profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-item {
+  margin-bottom: 20px;
+}
+
+.profile-item label {
+  font-weight: bold;
+  color: #343c6a;
+  display: block;
+}
+
+.profile-item input {
+  width: 300px;
+  padding: 8px;
+  border: 1px solid #b1b1b1;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.profile-logo {
+  font-weight: bold;
+  color: #343c6a;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+select {
+  width: 300px;
+  padding: 8px;
+  border: 1px solid #b1b1b1;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+textarea {
+  width: 300px;
+  padding: 8px;
+  border: 1px solid #b1b1b1;
+  border-radius: 5px;
+  margin-top: 5px;
+  resize: none;
+  height: 100px;
+  font-family: "Inter-SemiBold", sans-serif;
+}
+
+.edit-profile-btn {
+  margin-top: 20px;
+}
+
+.edit-profile-btn button {
+  background-color: #0058ea;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 200px;
+}
+
+.edit-profile-btn button:hover {
+  background-color: #0041b5;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(105, 104, 104, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.container.blurred {
+  filter: blur(5px);
+}
+
+.overlay-content {
+  background: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 32%;
+}
+
+.overlay-content h1 {
+  margin-bottom: 15px;
+  color: #343c6a;
+}
+
+.overlay-content p {
+  margin-bottom: 20px;
+  color: #131832;
+  font-weight: 200;
+}
+.check-icon {
+  width: 100px;
+}
+
+.yes-btn {
+  padding: 10px 30px;
+  font-size: 14px;
+  background-color: #005eff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.no-btn {
+  padding: 10px 30px;
+  font-size: 14px;
+  background-color: #ff0040;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
